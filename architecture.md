@@ -21,6 +21,7 @@ All executable helper scripts live under `scripts/`.
 - `scripts/inspect_latex_project.py`: Mechanical LaTeX project inspection and `--map` project-map generation. It may discover files, sections, paragraphs, captions, labels, refs, citations, and math spans, but it must not be treated as the semantic authority for polishing units.
 - `scripts/build_task_skeleton.py`: Generates a mechanical starter task skeleton from a project map. The skeleton requires main-agent review before use.
 - `scripts/prepare_review_bundle.py`: Generates project map, task skeleton, task board, review Markdown, and read-only summary for human task-decomposition review.
+- `scripts/prepare_task_context.py`: Generates per-task JSON and Markdown context packages from a reviewed task board for main-agent or specialist-agent review.
 - `scripts/run_readonly_real_paper_check.py`: Runs the mapper and task skeleton builder against an external LaTeX project, writes outputs to a chosen test directory, and verifies the source project was not modified.
 - `scripts/build_workbench.py`: Static HTML workbench generation for the current paragraph or scoped text unit.
 - `scripts/append_polish_log.py`: Append-only local JSONL log writer for completed polishing actions.
@@ -70,6 +71,7 @@ Runtime artifacts must not be committed.
 - Generated workbench HTML for real polishing sessions unless a test explicitly creates it under a temporary directory.
 - Manual real-paper validation outputs under `/data/latex_test/`.
 - Review-bundle outputs under `/data/latex_test/`: `project-map.json`, `task-skeleton.json`, `task-board.json`, `task-review.md`, and `readonly-summary.json`.
+- Per-task context packages under `/data/latex_test/` or a subdirectory of it.
 
 ## File Placement Rules
 

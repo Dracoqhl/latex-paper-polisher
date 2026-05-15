@@ -86,3 +86,30 @@ Valid `phase` values:
 - `caption`
 
 Initial `review_decision` is `unreviewed`. During task review, the user or main agent may mark tasks as `keep`, `skip`, `merge`, or `prioritize`.
+
+## Task Context Package
+
+A task context package is generated from a task board for one task. It is intended for main-agent review or specialist-agent suggestion generation.
+
+Each package contains:
+
+```json
+{
+  "schema_version": 1,
+  "mode": "task_context_package",
+  "project_root": "/path/to/paper",
+  "main_file": "main.tex",
+  "task": {},
+  "source_contexts": [
+    {
+      "file": "src/1_introduction.tex",
+      "line_start": 1,
+      "line_end": 30,
+      "text": "LaTeX source text"
+    }
+  ],
+  "instructions": []
+}
+```
+
+Task context packages are read-only review inputs. They must not be treated as authorization to write back to the source paper.

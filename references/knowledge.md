@@ -11,6 +11,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Specialist agents are suggestion-only by default. The main agent keeps exclusive writeback authority and reviews all suggestions before presenting final text to the user.
 - Use `/data/latex_test` for manual external validation outputs when testing real LaTeX projects.
 - Before polishing, generate a review bundle and inspect `task-review.md` / `task-board.json` so task scope can be reviewed, prioritized, skipped, or merged.
+- Generate a per-task context package before asking a main agent or specialist agent to produce polishing suggestions.
 
 ## Section Rules
 
