@@ -44,6 +44,7 @@ Superpowers design and implementation planning documents live under `docs/superp
 - `docs/superpowers/plans/`: Implementation plans derived from design documents.
 
 Do not place runtime state, generated workbench pages, or polishing logs under `docs/`.
+Current Phase 2 planning is tracked in `docs/superpowers/plans/2026-05-15-model-led-task-decomposition.md`.
 
 ## Tests And Fixtures
 
