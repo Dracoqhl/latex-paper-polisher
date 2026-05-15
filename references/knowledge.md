@@ -9,6 +9,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - When future work updates files or functionality, update both the evolving knowledge base and `architecture.md` when their contents are affected.
 - Python helpers should not own semantic paragraph splitting. They should provide source maps and validation only; the main agent should decompose polishing tasks after reading the paper.
 - Specialist agents are suggestion-only by default. The main agent keeps exclusive writeback authority and reviews all suggestions before presenting final text to the user.
+- Use `/data/latex_test` for manual external validation outputs when testing real LaTeX projects.
 
 ## Section Rules
 

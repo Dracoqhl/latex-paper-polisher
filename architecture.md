@@ -20,6 +20,7 @@ All executable helper scripts live under `scripts/`.
 
 - `scripts/inspect_latex_project.py`: Mechanical LaTeX project inspection and `--map` project-map generation. It may discover files, sections, paragraphs, captions, labels, refs, citations, and math spans, but it must not be treated as the semantic authority for polishing units.
 - `scripts/build_task_skeleton.py`: Generates a mechanical starter task skeleton from a project map. The skeleton requires main-agent review before use.
+- `scripts/run_readonly_real_paper_check.py`: Runs the mapper and task skeleton builder against an external LaTeX project, writes outputs to a chosen test directory, and verifies the source project was not modified.
 - `scripts/build_workbench.py`: Static HTML workbench generation for the current paragraph or scoped text unit.
 - `scripts/append_polish_log.py`: Append-only local JSONL log writer for completed polishing actions.
 - `scripts/validate_writeback.py`: Before/after LaTeX construct safety checker for source writeback.
@@ -56,6 +57,7 @@ Tests live under `tests/`.
 - `tests/fixtures/`: Small committed fixtures used for deterministic tests.
 
 Large real paper projects must not be copied into this repository as fixtures. Use external paper directories read-only and write generated validation output to `/tmp` or another ignored location.
+For user-facing manual validation, prefer `/data/latex_test` as the external output directory.
 
 ## Local-Only Runtime Artifacts
 
@@ -65,6 +67,7 @@ Runtime artifacts must not be committed.
 - `.pytest_cache/`: Pytest cache.
 - `__pycache__/` and `*.pyc`: Python bytecode cache.
 - Generated workbench HTML for real polishing sessions unless a test explicitly creates it under a temporary directory.
+- Manual real-paper validation outputs under `/data/latex_test/`.
 
 ## File Placement Rules
 
@@ -75,4 +78,5 @@ Runtime artifacts must not be committed.
 - Put design decisions and future implementation plans in `docs/superpowers/`.
 - Put committed test inputs in `tests/fixtures/`.
 - Put generated, local, or paper-specific runtime output outside the repository or in ignored directories.
+- Put manual external validation outputs in `/data/latex_test/` when the directory is available.
 - Keep source writeback authority in the main agent workflow; helper scripts may validate or format data, but they should not make semantic polishing decisions.
