@@ -5,6 +5,8 @@ This file is maintained automatically during paper polishing sessions. The user 
 ## Confirmed Preferences
 
 - Prefer academic English that is clear, precise, and not overstated.
+- Maintain `architecture.md` alongside functional or file-structure changes. It is the source of truth for intended project layout and file placement rules.
+- When future work updates files or functionality, update both the evolving knowledge base and `architecture.md` when their contents are affected.
 
 ## Section Rules
 

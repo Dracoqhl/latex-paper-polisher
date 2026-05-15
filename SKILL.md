@@ -48,6 +48,8 @@ Polish academic English LaTeX papers while preserving technical meaning and LaTe
 - Preserve LaTeX commands and technical meaning.
 - Stop before committing if unrelated user changes are present.
 - Keep logs out of GitHub.
+- When files, directories, helper responsibilities, or workflow artifacts change, update `architecture.md`.
+- When user preferences, terminology, recurring errors, or process preferences change, update `references/knowledge.md`.
 
 ## References
 
@@ -55,3 +57,4 @@ Polish academic English LaTeX papers while preserving technical meaning and LaTe
 - LaTeX preservation rules: `references/latex-preservation.md`
 - Log format: `references/log-schema.md`
 - Evolving knowledge: `references/knowledge.md`
+- Project layout and file placement rules: `architecture.md`
