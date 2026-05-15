@@ -74,6 +74,84 @@ def extract_constructs(text: str) -> dict:
     }
 
 
+def make_anchor(file: str, line: int, kind: str, title: str | None = None) -> dict:
+    anchor = {"file": file, "line": line, "kind": kind}
+    if title is not None:
+        anchor["title"] = title
+    return anchor
+
+
+def extract_sections(file: str, text: str) -> list[dict]:
+    sections = []
+    for match in SECTION_RE.finditer(text):
+        line = line_number(text, match.start())
+        sections.append({
+            "level": match.group(1),
+            "title": match.group(2),
+            "file": file,
+            "line": line,
+            "anchor": make_anchor(file, line, "section", match.group(2)),
+        })
+    return sections
+
+
+def extract_captions(file: str, text: str) -> list[dict]:
+    captions = []
+    for match in CAPTION_RE.finditer(text):
+        line = line_number(text, match.start())
+        nearby = text[match.end(): match.end() + 300]
+        label_match = LABEL_RE.search(nearby)
+        captions.append({
+            "file": file,
+            "line": line,
+            "text": match.group(1).strip(),
+            "label": label_match.group(1) if label_match else None,
+            "anchor": make_anchor(file, line, "caption"),
+        })
+    return captions
+
+
+def extract_keyed_constructs(file: str, text: str, pattern: re.Pattern, kind: str) -> list[dict]:
+    return [
+        {"file": file, "line": line_number(text, match.start()), "kind": kind, "key": match.group(1)}
+        for match in pattern.finditer(text)
+    ]
+
+
+def extract_multi_keyed_constructs(file: str, text: str, pattern: re.Pattern, kind: str) -> list[dict]:
+    items = []
+    for match in pattern.finditer(text):
+        for key in match.group(1).split(","):
+            key = key.strip()
+            if key:
+                items.append({"file": file, "line": line_number(text, match.start()), "kind": kind, "key": key})
+    return items
+
+
+def detect_protected_regions(file: str, text: str) -> list[dict]:
+    regions = []
+    begin_doc = text.find("\\begin{document}")
+    if begin_doc > 0:
+        regions.append({
+            "file": file,
+            "kind": "preamble",
+            "start_line": 1,
+            "end_line": line_number(text, begin_doc),
+            "reason": "LaTeX preamble is not a polishing task.",
+        })
+    for env in ("table", "tabular", "rawbox", "algorithm", "align", "equation"):
+        pattern = re.compile(rf"\\begin\{{{env}\}}.*?\\end\{{{env}\}}", re.DOTALL)
+        for match in pattern.finditer(text):
+            regions.append({
+                "file": file,
+                "kind": f"environment:{env}",
+                "start_line": line_number(text, match.start()),
+                "end_line": line_number(text, match.end()),
+                "reason": f"{env} environment should not be treated as ordinary prose.",
+            })
+    return regions
+
+
 def paragraph_blocks(text: str) -> list[tuple[int, int, str]]:
     blocks = []
     offset = 0
@@ -158,13 +236,52 @@ def inspect(project: Path) -> dict:
     }
 
 
+def build_project_map(project: Path) -> dict:
+    project = project.resolve()
+    main = find_main_file(project)
+    files = expand_files(project, main)
+    sections: list[dict] = []
+    captions: list[dict] = []
+    labels: list[dict] = []
+    refs: list[dict] = []
+    citations: list[dict] = []
+    protected_regions: list[dict] = []
+
+    for path in files:
+        rel = path.relative_to(project).as_posix()
+        text = read_text(path)
+        protected_regions.extend(detect_protected_regions(rel, text))
+        sections.extend(extract_sections(rel, text))
+        captions.extend(extract_captions(rel, text))
+        labels.extend(extract_keyed_constructs(rel, text, LABEL_RE, "label"))
+        refs.extend(extract_multi_keyed_constructs(rel, text, REF_RE, "ref"))
+        citations.extend(extract_multi_keyed_constructs(rel, text, CITE_RE, "citation"))
+
+    return {
+        "schema_version": 2,
+        "mode": "project_map",
+        "project_root": str(project),
+        "main_file": main.relative_to(project).as_posix(),
+        "files": [path.relative_to(project).as_posix() for path in files],
+        "sections": sections,
+        "captions": captions,
+        "labels": labels,
+        "refs": refs,
+        "citations": citations,
+        "protected_regions": protected_regions,
+    }
+
+
 def main(argv: list[str]) -> int:
-    if len(argv) != 2:
-        print("usage: inspect_latex_project.py PROJECT_DIR", file=sys.stderr)
-        return 2
-    data = inspect(Path(argv[1]))
-    print(json.dumps(data, ensure_ascii=False, indent=2))
-    return 0
+    if len(argv) == 3 and argv[1] == "--map":
+        print(json.dumps(build_project_map(Path(argv[2])), ensure_ascii=False, indent=2))
+        return 0
+    if len(argv) == 2:
+        data = inspect(Path(argv[1]))
+        print(json.dumps(data, ensure_ascii=False, indent=2))
+        return 0
+    print("usage: inspect_latex_project.py [--map] PROJECT_DIR", file=sys.stderr)
+    return 2
 
 
 if __name__ == "__main__":
