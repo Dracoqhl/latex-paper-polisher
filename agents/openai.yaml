@@ -1,0 +1,3 @@
+display_name: LaTeX Paper Polisher
+short_description: Polish academic English LaTeX papers with structure review, paragraph workbench, logs, and learned preferences.
+default_prompt: Review the current LaTeX paper project, diagnose the macro structure, then help polish it paragraph by paragraph while preserving LaTeX source structure.
