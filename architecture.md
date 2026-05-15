@@ -33,6 +33,7 @@ Reference material lives under `references/`.
 - `references/section-style-rules.md`: Default academic writing conventions by paper section.
 - `references/latex-preservation.md`: Rules for preserving LaTeX constructs during review and writeback.
 - `references/log-schema.md`: Local polish log schema and storage policy.
+- `references/task-protocol.md`: Task plan and specialist-agent output schemas for model-led decomposition.
 
 When user preferences or recurring project rules change, update `references/knowledge.md`. When file placement or responsibilities change, update this document as well.
 
@@ -69,6 +70,7 @@ Runtime artifacts must not be committed.
 - Put deterministic tooling in `scripts/`.
 - Put skill instructions in `SKILL.md`.
 - Put stable reference policy in `references/`.
+- Put shared task and agent-output protocols in `references/`, not in scripts.
 - Put design decisions and future implementation plans in `docs/superpowers/`.
 - Put committed test inputs in `tests/fixtures/`.
 - Put generated, local, or paper-specific runtime output outside the repository or in ignored directories.

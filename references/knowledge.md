@@ -7,6 +7,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Prefer academic English that is clear, precise, and not overstated.
 - Maintain `architecture.md` alongside functional or file-structure changes. It is the source of truth for intended project layout and file placement rules.
 - When future work updates files or functionality, update both the evolving knowledge base and `architecture.md` when their contents are affected.
+- Python helpers should not own semantic paragraph splitting. They should provide source maps and validation only; the main agent should decompose polishing tasks after reading the paper.
 
 ## Section Rules
 
