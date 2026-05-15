@@ -10,6 +10,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Python helpers should not own semantic paragraph splitting. They should provide source maps and validation only; the main agent should decompose polishing tasks after reading the paper.
 - Specialist agents are suggestion-only by default. The main agent keeps exclusive writeback authority and reviews all suggestions before presenting final text to the user.
 - Use `/data/latex_test` for manual external validation outputs when testing real LaTeX projects.
+- Before polishing, generate a review bundle and inspect `task-review.md` / `task-board.json` so task scope can be reviewed, prioritized, skipped, or merged.
 
 ## Section Rules
 

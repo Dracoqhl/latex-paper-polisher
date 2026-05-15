@@ -64,3 +64,25 @@ Each output is a JSON object with:
 ```
 
 The main agent reviews specialist output before presenting final text to the user.
+
+## Task Board
+
+The task board is the main-agent review layer over the mechanical task skeleton. It preserves every skeleton task and adds review fields:
+
+```json
+{
+  "priority": "normal",
+  "phase": "section",
+  "review_decision": "unreviewed",
+  "user_notes": [],
+  "main_agent_notes": []
+}
+```
+
+Valid `phase` values:
+
+- `global`
+- `section`
+- `caption`
+
+Initial `review_decision` is `unreviewed`. During task review, the user or main agent may mark tasks as `keep`, `skip`, `merge`, or `prioritize`.
