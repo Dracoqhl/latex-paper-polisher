@@ -18,7 +18,8 @@ Update this file whenever a change adds, removes, renames, or materially changes
 
 All executable helper scripts live under `scripts/`.
 
-- `scripts/inspect_latex_project.py`: Mechanical LaTeX project inspection. It may discover files, sections, paragraphs, captions, labels, refs, citations, and math spans, but it must not be treated as the semantic authority for polishing units.
+- `scripts/inspect_latex_project.py`: Mechanical LaTeX project inspection and `--map` project-map generation. It may discover files, sections, paragraphs, captions, labels, refs, citations, and math spans, but it must not be treated as the semantic authority for polishing units.
+- `scripts/build_task_skeleton.py`: Generates a mechanical starter task skeleton from a project map. The skeleton requires main-agent review before use.
 - `scripts/build_workbench.py`: Static HTML workbench generation for the current paragraph or scoped text unit.
 - `scripts/append_polish_log.py`: Append-only local JSONL log writer for completed polishing actions.
 - `scripts/validate_writeback.py`: Before/after LaTeX construct safety checker for source writeback.
