@@ -1,0 +1,4 @@
+__pycache__/
+.pytest_cache/
+.latex-paper-polisher/logs/
+*.pyc
