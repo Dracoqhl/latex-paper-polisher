@@ -66,7 +66,7 @@ Required fields:
 
 ## Section Polish Suggestions
 
-A section polish suggestion file is returned by one fresh section-specialist agent after it reads the section polish package template, paper summary, and any needed neighboring context. It is suggestion-only and must match the source package item ids, source locations, and original text exactly.
+A section polish suggestion file starts as a deterministic template generated from a source section polish package. It is then returned by one fresh section-specialist agent after it reads the template, section polish package, paper summary, and any needed neighboring context. It is suggestion-only and must match the source package item ids, source locations, and original text exactly.
 
 Required fields:
 
@@ -92,7 +92,7 @@ Required fields:
 }
 ```
 
-Validate section polish suggestions against the source package before merging them into a workbench-ready section polish package. Merging fills `suggested_text`, `revision_notes`, `risks`, and `questions`, but keeps `editable_text` equal to `original_text`.
+Generated suggestion templates leave `suggested_text` empty and list fields empty; they are intentionally invalid until the section specialist fills them. Validate section polish suggestions against the source package before merging them into a workbench-ready section polish package. Merging fills `suggested_text`, `revision_notes`, `risks`, and `questions`, but keeps `editable_text` equal to `original_text`.
 For browser review, prefer the wrapper that validates suggestions, writes the merged package, and generates the section workbench HTML in one command so manual testing uses a single artifact chain.
 
 ## Section Final Edits

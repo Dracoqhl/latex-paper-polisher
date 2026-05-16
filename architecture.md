@@ -39,6 +39,7 @@ All executable helper scripts live under `scripts/`.
 - `scripts/prepare_workbench_review_state.py`: Merges a workbench payload, main-agent review decision, and writeback candidate into an HTML-ready review-state payload.
 - `scripts/record_review_decision.py`: Records the main agent's accept, revise, or reject decision for a workbench payload and marks whether it is ready for writeback.
 - `scripts/prepare_writeback_candidate.py`: Converts an accepted or revised main-agent review decision into a writeback candidate JSON without modifying source files.
+- `scripts/prepare_section_polish_suggestions_template.py`: Generates a fillable section-specialist suggestions template from a section polish package.
 - `scripts/validate_section_polish_suggestions.py`: Validates section-specialist suggestion JSON against its source section package before merge.
 - `scripts/merge_section_polish_suggestions.py`: Merges validated section-specialist suggestions into a section polish package while preserving original editable text defaults.
 - `scripts/prepare_section_workbench_from_suggestions.py`: One-command wrapper that validates and merges section-specialist suggestions, then generates a section workbench HTML page.
