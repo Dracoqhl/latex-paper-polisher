@@ -119,6 +119,28 @@ Required fields:
 
 Section writeback candidates are staging artifacts. They do not modify source files and still require explicit writeback validation and user approval.
 
+## Section Writeback Preflight
+
+A section writeback preflight checks a section writeback candidate against a paper directory without modifying source files.
+
+It verifies that each `original_text` appears exactly once in its target source file and compares LaTeX construct counts between `original_text` and `final_text`.
+
+Preflight output contains:
+
+```json
+{
+  "ok": true,
+  "mode": "section_writeback_preflight",
+  "section_id": "introduction",
+  "project_root": "/path/to/paper",
+  "source_write_permitted": false,
+  "items": [],
+  "errors": []
+}
+```
+
+Passing preflight does not apply edits. It is evidence for a later explicitly approved writeback step.
+
 ## Main-Agent Task Plan
 
 The main agent creates and owns the task plan after reading the paper context.

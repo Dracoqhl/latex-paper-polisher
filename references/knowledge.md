@@ -23,6 +23,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Section polishing should use a precomputed section package so previous/next paragraph navigation is local and fast. The editable text defaults to original text, with original/suggested copy buttons for manual editing.
 - Validate downloaded section-final-edits JSON against its source section package before preparing any writeback candidate.
 - Section writeback candidates are still staging artifacts. They require later explicit validation and user approval before source files are modified.
+- Run section writeback preflight before any source modification. Preflight must confirm exact single matches and LaTeX construct preservation, but it still does not authorize writeback by itself.
 
 ## Section Rules
 
