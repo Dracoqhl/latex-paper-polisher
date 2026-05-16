@@ -29,6 +29,8 @@ All executable helper scripts live under `scripts/`.
 - `scripts/inspect_latex_project.py`: Mechanical LaTeX project inspection and `--map` project-map generation. It may discover files, sections, paragraphs, captions, labels, refs, citations, and math spans, but it must not be treated as the semantic authority for polishing units.
 - `scripts/build_task_skeleton.py`: Generates a mechanical starter task skeleton from a project map. The skeleton requires main-agent review before use.
 - `scripts/prepare_review_bundle.py`: Generates project map, task skeleton, task board, review Markdown, and read-only summary for human task-decomposition review.
+- `scripts/prepare_paper_summary_template.py`: Generates a fillable paper-summary template from a mechanical project map after the main agent has inspected the full-paper structure.
+- `scripts/validate_paper_summary.py`: Validates a completed paper-summary JSON before it is used as context for section polish packages.
 - `scripts/prepare_task_context.py`: Generates per-task JSON and Markdown context packages from a reviewed task board for main-agent or specialist-agent review.
 - `scripts/prepare_suggestion_template.py`: Generates a structured specialist-suggestion JSON template from one task context package.
 - `scripts/validate_specialist_suggestion.py`: Validates a specialist-suggestion JSON file against the task context before the main agent reviews or presents it.
@@ -98,7 +100,7 @@ Runtime artifacts must not be committed.
 - Main-agent review decision JSON under `/data/latex_test/` or a subdirectory of it for manual validation.
 - Writeback candidate JSON under `/data/latex_test/` or a subdirectory of it for manual validation.
 - Workbench review-state payload JSON under `/data/latex_test/` or a subdirectory of it for manual validation.
-- Paper summary, section polish package, section final edits, and generated section workbench HTML under `/data/latex_test/` or another runtime output directory.
+- Paper summary templates, completed paper summaries, section polish packages, section final edits, and generated section workbench HTML under `/data/latex_test/` or another runtime output directory.
 - Section writeback candidate JSON under `/data/latex_test/` or another runtime output directory.
 - Section writeback preflight reports under `/data/latex_test/` or another runtime output directory.
 - Section writeback dry-run reports under `/data/latex_test/` or another runtime output directory.

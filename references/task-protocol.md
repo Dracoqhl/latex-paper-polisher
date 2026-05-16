@@ -28,6 +28,8 @@ Required fields:
 }
 ```
 
+Generate the initial paper summary template from a project map, then have the main agent fill it after reading the full paper. Validate the completed summary before any section specialist uses it as context.
+
 Paper summaries are context artifacts and do not authorize source edits.
 
 ## Section Polish Package
