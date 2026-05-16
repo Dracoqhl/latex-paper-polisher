@@ -31,6 +31,7 @@ All executable helper scripts live under `scripts/`.
 - `scripts/prepare_review_bundle.py`: Generates project map, task skeleton, task board, review Markdown, and read-only summary for human task-decomposition review.
 - `scripts/prepare_paper_summary_template.py`: Generates a fillable paper-summary template from a mechanical project map after the main agent has inspected the full-paper structure.
 - `scripts/validate_paper_summary.py`: Validates a completed paper-summary JSON before it is used as context for section polish packages.
+- `scripts/prepare_section_polish_package_template.py`: Generates a fillable section polish package template from full inspection data and a validated paper summary for one target section.
 - `scripts/prepare_task_context.py`: Generates per-task JSON and Markdown context packages from a reviewed task board for main-agent or specialist-agent review.
 - `scripts/prepare_suggestion_template.py`: Generates a structured specialist-suggestion JSON template from one task context package.
 - `scripts/validate_specialist_suggestion.py`: Validates a specialist-suggestion JSON file against the task context before the main agent reviews or presents it.

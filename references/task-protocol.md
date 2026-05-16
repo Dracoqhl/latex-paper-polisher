@@ -34,7 +34,7 @@ Paper summaries are context artifacts and do not authorize source edits.
 
 ## Section Polish Package
 
-A section polish package is generated after one fresh section-specialist agent context reads one full section plus the paper summary and needed neighboring context.
+A section polish package starts as a deterministic template generated from full inspection data plus a validated paper summary for one target section. One fresh section-specialist agent context then reads that template, the full section, the paper summary, and any needed neighboring context before filling suggestions.
 
 Required fields:
 
@@ -62,7 +62,7 @@ Required fields:
 }
 ```
 
-`editable_text` must default to `original_text`. The suggested text is not automatically adopted.
+`editable_text` must default to `original_text`. Template generation leaves `suggested_text`, `revision_notes`, and `questions` empty for the section specialist to fill. The suggested text is not automatically adopted.
 
 ## Section Final Edits
 
