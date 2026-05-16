@@ -100,6 +100,35 @@ Workbench payloads contain:
 
 The workbench remains review-only. Creating a payload or HTML page does not authorize source writeback.
 
+## Main-Agent Review Decision
+
+After reviewing a workbench payload, the main agent records one explicit decision:
+
+- `accept`: use the suggested text as the final candidate.
+- `revise`: use a main-agent revised final text.
+- `reject`: reject the suggestion and keep it out of writeback preparation.
+
+Each decision record contains:
+
+```json
+{
+  "schema_version": 1,
+  "mode": "main_agent_review_decision",
+  "paragraph_id": "introduction-section-polish",
+  "source_file": "src/1_introduction.tex",
+  "section": "Polish Introduction",
+  "decision": "accept",
+  "review_notes": "Main agent accepts specialist suggestion.",
+  "original_text": "Original source text.",
+  "suggested_text": "Suggested revision.",
+  "final_text": "Final candidate text.",
+  "ready_for_writeback": true,
+  "metadata": {}
+}
+```
+
+Only `accept` and `revise` decisions can become writeback candidates. A `reject` decision must keep `ready_for_writeback` false.
+
 ## Task Board
 
 The task board is the main-agent review layer over the mechanical task skeleton. It preserves every skeleton task and adds review fields:

@@ -14,6 +14,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Generate a per-task context package before asking a main agent or specialist agent to produce polishing suggestions.
 - Generate and validate a specialist suggestion JSON before the main agent reviews or presents specialist output.
 - Convert only validated specialist suggestions into workbench payloads; workbench HTML is still review-only and does not authorize writeback.
+- Record the main agent's accept, revise, or reject decision before preparing any source writeback candidate.
 
 ## Section Rules
 
