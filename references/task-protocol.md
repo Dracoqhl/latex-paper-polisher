@@ -65,6 +65,20 @@ Each output is a JSON object with:
 
 The main agent reviews specialist output before presenting final text to the user.
 
+## Specialist Suggestion Handoff
+
+Before asking a specialist agent for polishing suggestions, generate a suggestion template from the task context package. The template fixes the task id, target file, source line range, original text, and suggestion-only metadata.
+
+Specialist agents fill only these review fields:
+
+- `proposed_text`
+- `rationale`
+- `latex_constructs_preserved`
+- `risks`
+- `questions`
+
+After receiving a suggestion, validate it against the task context. Validation only checks schema and source-boundary consistency; it does not decide whether the prose is good enough. The main agent must still review meaning, terminology, paper-level consistency, and LaTeX preservation before presenting text to the user.
+
 ## Task Board
 
 The task board is the main-agent review layer over the mechanical task skeleton. It preserves every skeleton task and adds review fields:

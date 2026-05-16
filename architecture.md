@@ -22,6 +22,8 @@ All executable helper scripts live under `scripts/`.
 - `scripts/build_task_skeleton.py`: Generates a mechanical starter task skeleton from a project map. The skeleton requires main-agent review before use.
 - `scripts/prepare_review_bundle.py`: Generates project map, task skeleton, task board, review Markdown, and read-only summary for human task-decomposition review.
 - `scripts/prepare_task_context.py`: Generates per-task JSON and Markdown context packages from a reviewed task board for main-agent or specialist-agent review.
+- `scripts/prepare_suggestion_template.py`: Generates a structured specialist-suggestion JSON template from one task context package.
+- `scripts/validate_specialist_suggestion.py`: Validates a specialist-suggestion JSON file against the task context before the main agent reviews or presents it.
 - `scripts/run_readonly_real_paper_check.py`: Runs the mapper and task skeleton builder against an external LaTeX project, writes outputs to a chosen test directory, and verifies the source project was not modified.
 - `scripts/build_workbench.py`: Static HTML workbench generation for the current paragraph or scoped text unit.
 - `scripts/append_polish_log.py`: Append-only local JSONL log writer for completed polishing actions.
@@ -72,6 +74,7 @@ Runtime artifacts must not be committed.
 - Manual real-paper validation outputs under `/data/latex_test/`.
 - Review-bundle outputs under `/data/latex_test/`: `project-map.json`, `task-skeleton.json`, `task-board.json`, `task-review.md`, and `readonly-summary.json`.
 - Per-task context packages under `/data/latex_test/` or a subdirectory of it.
+- Specialist suggestion templates and returned suggestion JSON files under `/data/latex_test/` or a subdirectory of it.
 
 ## File Placement Rules
 
