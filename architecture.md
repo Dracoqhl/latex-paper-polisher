@@ -38,6 +38,7 @@ All executable helper scripts live under `scripts/`.
 - `scripts/prepare_writeback_candidate.py`: Converts an accepted or revised main-agent review decision into a writeback candidate JSON without modifying source files.
 - `scripts/validate_section_polish_package.py`: Validates section polish package JSON before generating a section workbench.
 - `scripts/build_section_workbench.py`: Generates an interactive section-level HTML workbench from a section polish package.
+- `scripts/validate_section_final_edits.py`: Validates downloaded section-final-edits JSON against its source section polish package before any later writeback preparation.
 - `scripts/run_readonly_real_paper_check.py`: Runs the mapper and task skeleton builder against an external LaTeX project, writes outputs to a chosen test directory, and verifies the source project was not modified.
 - `scripts/build_workbench.py`: Static HTML workbench generation for the current paragraph or scoped text unit. It reads reusable assets from `assets/workbench/`, embeds the current payload, and includes optional review status and next-command sections.
 - `scripts/append_polish_log.py`: Append-only local JSONL log writer for completed polishing actions.

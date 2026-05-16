@@ -86,7 +86,7 @@ Required fields:
 }
 ```
 
-Section final edits are staging artifacts. They do not modify source files.
+Section final edits are staging artifacts. They do not modify source files. Before any later writeback preparation, validate section final edits against the source section polish package so item order, source locations, original text, and non-empty final text are confirmed.
 
 ## Main-Agent Task Plan
 

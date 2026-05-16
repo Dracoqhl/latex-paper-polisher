@@ -21,6 +21,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - For the section workbench, the editable final-text box defaults to the original paragraph. Original and suggested panels should provide copy buttons, and all final edits are maintained manually by the user in the editable box.
 - For section polishing, use one fresh specialist-agent context per section and reuse it for the whole section package; do not spawn a fresh agent per paragraph by default.
 - Section polishing should use a precomputed section package so previous/next paragraph navigation is local and fast. The editable text defaults to original text, with original/suggested copy buttons for manual editing.
+- Validate downloaded section-final-edits JSON against its source section package before preparing any writeback candidate.
 
 ## Section Rules
 
