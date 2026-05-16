@@ -88,6 +88,37 @@ Required fields:
 
 Section final edits are staging artifacts. They do not modify source files. Before any later writeback preparation, validate section final edits against the source section polish package so item order, source locations, original text, and non-empty final text are confirmed.
 
+## Section Writeback Candidate
+
+A section writeback candidate is generated only after section final edits pass validation against the source section polish package.
+
+Required fields:
+
+```json
+{
+  "schema_version": 1,
+  "mode": "section_writeback_candidate",
+  "section_id": "introduction",
+  "section_title": "Introduction",
+  "source_file": "src/1_introduction.tex",
+  "source_files": ["src/1_introduction.tex"],
+  "items": [
+    {
+      "item_id": "intro-p001",
+      "source_file": "src/1_introduction.tex",
+      "line_range": [10, 18],
+      "original_text": "Original paragraph.",
+      "final_text": "User-maintained final paragraph."
+    }
+  ],
+  "validation_required": true,
+  "source_write_permitted": false,
+  "metadata": {}
+}
+```
+
+Section writeback candidates are staging artifacts. They do not modify source files and still require explicit writeback validation and user approval.
+
 ## Main-Agent Task Plan
 
 The main agent creates and owns the task plan after reading the paper context.

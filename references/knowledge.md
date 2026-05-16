@@ -22,6 +22,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - For section polishing, use one fresh specialist-agent context per section and reuse it for the whole section package; do not spawn a fresh agent per paragraph by default.
 - Section polishing should use a precomputed section package so previous/next paragraph navigation is local and fast. The editable text defaults to original text, with original/suggested copy buttons for manual editing.
 - Validate downloaded section-final-edits JSON against its source section package before preparing any writeback candidate.
+- Section writeback candidates are still staging artifacts. They require later explicit validation and user approval before source files are modified.
 
 ## Section Rules
 
