@@ -13,6 +13,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Before polishing, generate a review bundle and inspect `task-review.md` / `task-board.json` so task scope can be reviewed, prioritized, skipped, or merged.
 - Generate a per-task context package before asking a main agent or specialist agent to produce polishing suggestions.
 - Generate and validate a specialist suggestion JSON before the main agent reviews or presents specialist output.
+- Convert only validated specialist suggestions into workbench payloads; workbench HTML is still review-only and does not authorize writeback.
 
 ## Section Rules
 

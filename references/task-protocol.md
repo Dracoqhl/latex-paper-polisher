@@ -79,6 +79,27 @@ Specialist agents fill only these review fields:
 
 After receiving a suggestion, validate it against the task context. Validation only checks schema and source-boundary consistency; it does not decide whether the prose is good enough. The main agent must still review meaning, terminology, paper-level consistency, and LaTeX preservation before presenting text to the user.
 
+## Workbench Payload
+
+A validated specialist suggestion may be converted into a workbench payload. The payload is the bridge between structured specialist output and the HTML workbench.
+
+Workbench payloads contain:
+
+```json
+{
+  "paragraph_id": "introduction-section-polish",
+  "source_file": "src/1_introduction.tex",
+  "section": "Polish Introduction",
+  "original_text": "Original source text.",
+  "suggested_text": "Suggested revision.",
+  "rationale": ["Reason for the change."],
+  "warnings": ["Risk: ...", "Question: ..."],
+  "metadata": {}
+}
+```
+
+The workbench remains review-only. Creating a payload or HTML page does not authorize source writeback.
+
 ## Task Board
 
 The task board is the main-agent review layer over the mechanical task skeleton. It preserves every skeleton task and adds review fields:
