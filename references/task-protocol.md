@@ -93,6 +93,7 @@ Required fields:
 ```
 
 Validate section polish suggestions against the source package before merging them into a workbench-ready section polish package. Merging fills `suggested_text`, `revision_notes`, `risks`, and `questions`, but keeps `editable_text` equal to `original_text`.
+For browser review, prefer the wrapper that validates suggestions, writes the merged package, and generates the section workbench HTML in one command so manual testing uses a single artifact chain.
 
 ## Section Final Edits
 

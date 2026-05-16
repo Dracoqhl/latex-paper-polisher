@@ -14,6 +14,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Before generating section polish packages, create a paper-summary template from the project map, have the main agent fill the full-paper thesis/contributions/risks/section roles, and validate the completed summary.
 - Generate section polish package templates from inspection data and the validated paper summary; template generation may carry paragraph/caption text and mechanical risks, but specialist agents fill the actual suggestions.
 - Validate section-specialist suggestion JSON against the source section package before merging it into a workbench-ready package. Merging suggestions must not change the editable text default from original text.
+- For HTML testing, prefer the one-command suggestions-to-workbench wrapper so validation, merge, and page generation stay in sync.
 - Generate a per-task context package before asking a main agent or specialist agent to produce polishing suggestions.
 - Generate and validate a specialist suggestion JSON before the main agent reviews or presents specialist output.
 - Convert only validated specialist suggestions into workbench payloads; workbench HTML is still review-only and does not authorize writeback.
