@@ -16,6 +16,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Convert only validated specialist suggestions into workbench payloads; workbench HTML is still review-only and does not authorize writeback.
 - Record the main agent's accept, revise, or reject decision before preparing any source writeback candidate.
 - Writeback candidates are staging artifacts only. They require later validation and do not authorize source modification by themselves.
+- First-version HTML integration should display review state and next CLI commands only; it must not directly modify source files.
 
 ## Section Rules
 

@@ -15,6 +15,38 @@ def list_items(items: list[str]) -> str:
     return "\n".join(f"<li>{esc(item)}</li>" for item in items)
 
 
+def optional_review_status(payload: dict) -> str:
+    status = payload.get("review_status")
+    candidate = payload.get("writeback_candidate")
+    commands = payload.get("next_commands", [])
+    if not status and not candidate and not commands:
+        return ""
+
+    status_items = []
+    if status:
+        status_items.extend([
+            f"Decision: {status.get('decision', '')}",
+            f"Ready for writeback: {str(status.get('ready_for_writeback', False)).lower()}",
+            f"Review notes: {status.get('review_notes', '')}",
+        ])
+    if candidate:
+        status_items.extend([
+            f"Candidate available: {str(candidate.get('available', False)).lower()}",
+            f"Validation required: {str(candidate.get('validation_required', True)).lower()}",
+            f"Source write permitted: {str(candidate.get('source_write_permitted', False)).lower()}",
+        ])
+
+    return f"""
+    <section class="full">
+      <h2>Review Status</h2>
+      <ul>{list_items(status_items)}</ul>
+    </section>
+    <section class="full">
+      <h2>Next Commands</h2>
+      <ul>{list_items(commands)}</ul>
+    </section>"""
+
+
 def render(payload: dict) -> str:
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -58,6 +90,7 @@ def render(payload: dict) -> str:
       <h2>Confirmation</h2>
       <p>Review this paragraph in the browser, then confirm or revise it in the Codex conversation. This page does not write to source files.</p>
     </section>
+    {optional_review_status(payload)}
   </div>
 </main>
 </body>

@@ -100,6 +100,31 @@ Workbench payloads contain:
 
 The workbench remains review-only. Creating a payload or HTML page does not authorize source writeback.
 
+## Workbench Review State
+
+A workbench review-state payload merges the review-only text payload, the main-agent decision, and the writeback candidate status. It exists so the HTML workbench can show the current pipeline state and exact next CLI commands without directly modifying source files.
+
+It may add these fields to the workbench payload:
+
+```json
+{
+  "review_status": {
+    "decision": "accept",
+    "ready_for_writeback": true,
+    "review_notes": "Main agent accepts specialist suggestion."
+  },
+  "writeback_candidate": {
+    "available": true,
+    "validation_required": true,
+    "source_write_permitted": false,
+    "line_range": [1, 30]
+  },
+  "next_commands": ["python scripts/prepare_writeback_candidate.py ..."]
+}
+```
+
+The HTML page may display this state, but it must remain review-only until a later explicitly approved writeback step exists.
+
 ## Main-Agent Review Decision
 
 After reviewing a workbench payload, the main agent records one explicit decision:
