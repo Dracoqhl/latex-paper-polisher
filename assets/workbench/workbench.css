@@ -76,3 +76,23 @@ button:hover {
 .decision-actions {
   margin-bottom: 8px;
 }
+
+.section-header {
+  margin-bottom: 24px;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panel-title h2 {
+  margin: 0;
+}
+
+#final-text,
+#agent-discussion {
+  min-height: 140px;
+}
