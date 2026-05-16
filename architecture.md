@@ -81,6 +81,7 @@ Runtime artifacts must not be committed.
 
 - `.latex-paper-polisher/logs/`: Local polishing logs.
 - `.pytest_cache/`: Pytest cache.
+- `.superpowers/`: Local visual brainstorming companion state and mockups.
 - `__pycache__/` and `*.pyc`: Python bytecode cache.
 - Generated workbench HTML for real polishing sessions unless a test explicitly creates it under a temporary directory.
 - Manual real-paper validation outputs under `/data/latex_test/`.
