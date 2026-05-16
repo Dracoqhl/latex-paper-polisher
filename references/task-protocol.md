@@ -64,6 +64,36 @@ Required fields:
 
 `editable_text` must default to `original_text`. Template generation leaves `suggested_text`, `revision_notes`, and `questions` empty for the section specialist to fill. The suggested text is not automatically adopted.
 
+## Section Polish Suggestions
+
+A section polish suggestion file is returned by one fresh section-specialist agent after it reads the section polish package template, paper summary, and any needed neighboring context. It is suggestion-only and must match the source package item ids, source locations, and original text exactly.
+
+Required fields:
+
+```json
+{
+  "schema_version": 1,
+  "mode": "section_polish_suggestions",
+  "section_id": "introduction",
+  "section_title": "Introduction",
+  "source_package_ref": "section-polish-package-introduction-template.json",
+  "items": [
+    {
+      "item_id": "intro-p001",
+      "source_file": "src/1_introduction.tex",
+      "line_range": [10, 18],
+      "original_text": "Original paragraph.",
+      "suggested_text": "Suggested revision.",
+      "revision_notes": ["Why this change helps."],
+      "risks": [],
+      "questions": []
+    }
+  ]
+}
+```
+
+Validate section polish suggestions against the source package before merging them into a workbench-ready section polish package. Merging fills `suggested_text`, `revision_notes`, `risks`, and `questions`, but keeps `editable_text` equal to `original_text`.
+
 ## Section Final Edits
 
 The section workbench downloads section-final-edits JSON after the user reviews the whole section.
