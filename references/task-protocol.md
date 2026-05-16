@@ -141,6 +141,33 @@ Preflight output contains:
 
 Passing preflight does not apply edits. It is evidence for a later explicitly approved writeback step.
 
+## Section Writeback Dry Run
+
+A section writeback dry run computes the source changes that would be applied from a preflight-passing section writeback candidate.
+
+It produces a report with per-file unified diffs and never modifies source files:
+
+```json
+{
+  "ok": true,
+  "mode": "section_writeback_apply_dry_run",
+  "section_id": "introduction",
+  "dry_run": true,
+  "source_write_permitted": false,
+  "files": [
+    {
+      "source_file": "src/1_introduction.tex",
+      "item_count": 2,
+      "changed": true,
+      "unified_diff": "--- a/src/1_introduction.tex\n+++ b/src/1_introduction.tex\n"
+    }
+  ],
+  "errors": []
+}
+```
+
+Dry-run reports are for review only. Actual source writeback requires a separate explicit command and user approval.
+
 ## Main-Agent Task Plan
 
 The main agent creates and owns the task plan after reading the paper context.

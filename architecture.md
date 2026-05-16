@@ -41,6 +41,7 @@ All executable helper scripts live under `scripts/`.
 - `scripts/validate_section_final_edits.py`: Validates downloaded section-final-edits JSON against its source section polish package before any later writeback preparation.
 - `scripts/prepare_section_writeback_candidate.py`: Converts validated section-final-edits JSON into a section writeback candidate without modifying source files.
 - `scripts/preflight_section_writeback.py`: Performs read-only source matching and LaTeX construct checks for a section writeback candidate before any source writeback command exists.
+- `scripts/apply_section_writeback_candidate.py`: First-stage apply command with `--dry-run` only; computes per-file unified diffs for a preflight-passing section writeback candidate without writing source files.
 - `scripts/run_readonly_real_paper_check.py`: Runs the mapper and task skeleton builder against an external LaTeX project, writes outputs to a chosen test directory, and verifies the source project was not modified.
 - `scripts/build_workbench.py`: Static HTML workbench generation for the current paragraph or scoped text unit. It reads reusable assets from `assets/workbench/`, embeds the current payload, and includes optional review status and next-command sections.
 - `scripts/append_polish_log.py`: Append-only local JSONL log writer for completed polishing actions.
@@ -100,6 +101,7 @@ Runtime artifacts must not be committed.
 - Paper summary, section polish package, section final edits, and generated section workbench HTML under `/data/latex_test/` or another runtime output directory.
 - Section writeback candidate JSON under `/data/latex_test/` or another runtime output directory.
 - Section writeback preflight reports under `/data/latex_test/` or another runtime output directory.
+- Section writeback dry-run reports under `/data/latex_test/` or another runtime output directory.
 
 ## File Placement Rules
 

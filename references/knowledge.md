@@ -24,6 +24,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Validate downloaded section-final-edits JSON against its source section package before preparing any writeback candidate.
 - Section writeback candidates are still staging artifacts. They require later explicit validation and user approval before source files are modified.
 - Run section writeback preflight before any source modification. Preflight must confirm exact single matches and LaTeX construct preservation, but it still does not authorize writeback by itself.
+- Section writeback dry-run reports may show unified diffs for review, but dry-run mode must not modify paper source files.
 
 ## Section Rules
 
