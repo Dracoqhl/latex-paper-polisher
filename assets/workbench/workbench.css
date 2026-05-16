@@ -96,3 +96,8 @@ button:hover {
 #agent-discussion {
   min-height: 140px;
 }
+
+.section-text {
+  max-height: 420px;
+  overflow: auto;
+}

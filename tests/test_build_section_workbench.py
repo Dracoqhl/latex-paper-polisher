@@ -19,11 +19,15 @@ def test_builds_section_workbench_html(tmp_path):
     assert "Previous Paragraph" in html
     assert "Next Paragraph" in html
     assert "Submit Whole Section" in html
-    assert "copy-original" in html
-    assert "copy-suggested" in html
+    assert "Whole Section Original" in html
+    assert "Whole Section Suggested Revision" in html
+    assert "copy-section-original" in html
+    assert "copy-section-suggested" in html
+    assert "current-original-text" in html
     assert "final-text" in html
     assert "agent-discussion" in html
     assert "downloadSectionFinalEdits" in html
+    assert "renderWholeSection" in html
     assert "section-polish-package" in html
 
 

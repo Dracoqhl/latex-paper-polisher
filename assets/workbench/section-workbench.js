@@ -29,12 +29,18 @@ function saveCurrentState() {
   discussions[item.item_id] = document.getElementById("agent-discussion").value;
 }
 
+function renderWholeSection() {
+  const originalText = sectionPackage.items.map((item) => item.original_text).join("\n\n");
+  const suggestedText = sectionPackage.items.map((item) => item.suggested_text || item.original_text).join("\n\n");
+  document.getElementById("section-original-text").textContent = originalText;
+  document.getElementById("section-suggested-text").textContent = suggestedText;
+}
+
 function loadCurrentItem() {
   const item = currentItem();
   document.getElementById("item-counter").textContent = `${currentIndex + 1} / ${sectionPackage.items.length}`;
   document.getElementById("source-location").textContent = `${item.source_file}:${item.line_range[0]}-${item.line_range[1]}`;
-  document.getElementById("original-text").textContent = item.original_text;
-  document.getElementById("suggested-text").textContent = item.suggested_text;
+  document.getElementById("current-original-text").textContent = item.original_text;
   listItems("revision-notes", item.revision_notes);
   listItems("risks", item.risks);
   listItems("questions", item.questions);
@@ -83,9 +89,10 @@ function downloadSectionFinalEdits() {
   URL.revokeObjectURL(url);
 }
 
-document.getElementById("copy-original").addEventListener("click", () => copyText("original-text"));
-document.getElementById("copy-suggested").addEventListener("click", () => copyText("suggested-text"));
+document.getElementById("copy-section-original").addEventListener("click", () => copyText("section-original-text"));
+document.getElementById("copy-section-suggested").addEventListener("click", () => copyText("section-suggested-text"));
 document.getElementById("previous-item").addEventListener("click", () => goTo(-1));
 document.getElementById("next-item").addEventListener("click", () => goTo(1));
 document.getElementById("submit-section").addEventListener("click", downloadSectionFinalEdits);
+renderWholeSection();
 loadCurrentItem();
