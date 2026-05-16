@@ -129,6 +129,31 @@ Each decision record contains:
 
 Only `accept` and `revise` decisions can become writeback candidates. A `reject` decision must keep `ready_for_writeback` false.
 
+## Writeback Candidate
+
+A writeback candidate is generated only from a main-agent review decision with `ready_for_writeback: true`. It packages the original source text and final candidate text for later validation and possible source writeback.
+
+Each candidate contains:
+
+```json
+{
+  "schema_version": 1,
+  "mode": "writeback_candidate",
+  "paragraph_id": "introduction-section-polish",
+  "source_file": "src/1_introduction.tex",
+  "section": "Polish Introduction",
+  "decision": "accept",
+  "original_text": "Original source text.",
+  "final_text": "Final candidate text.",
+  "line_range": [1, 30],
+  "validation_required": true,
+  "source_write_permitted": false,
+  "metadata": {}
+}
+```
+
+Writeback candidates do not modify source files. They are an explicit staging artifact for a later validation and writeback step.
+
 ## Task Board
 
 The task board is the main-agent review layer over the mechanical task skeleton. It preserves every skeleton task and adds review fields:

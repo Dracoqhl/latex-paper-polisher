@@ -26,6 +26,7 @@ All executable helper scripts live under `scripts/`.
 - `scripts/validate_specialist_suggestion.py`: Validates a specialist-suggestion JSON file against the task context before the main agent reviews or presents it.
 - `scripts/prepare_workbench_payload.py`: Converts a validated specialist suggestion into the JSON payload consumed by the HTML workbench generator.
 - `scripts/record_review_decision.py`: Records the main agent's accept, revise, or reject decision for a workbench payload and marks whether it is ready for writeback.
+- `scripts/prepare_writeback_candidate.py`: Converts an accepted or revised main-agent review decision into a writeback candidate JSON without modifying source files.
 - `scripts/run_readonly_real_paper_check.py`: Runs the mapper and task skeleton builder against an external LaTeX project, writes outputs to a chosen test directory, and verifies the source project was not modified.
 - `scripts/build_workbench.py`: Static HTML workbench generation for the current paragraph or scoped text unit.
 - `scripts/append_polish_log.py`: Append-only local JSONL log writer for completed polishing actions.
@@ -79,6 +80,7 @@ Runtime artifacts must not be committed.
 - Specialist suggestion templates and returned suggestion JSON files under `/data/latex_test/` or a subdirectory of it.
 - Workbench payload JSON and generated HTML under `/data/latex_test/` or a subdirectory of it for manual validation.
 - Main-agent review decision JSON under `/data/latex_test/` or a subdirectory of it for manual validation.
+- Writeback candidate JSON under `/data/latex_test/` or a subdirectory of it for manual validation.
 
 ## File Placement Rules
 
