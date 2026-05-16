@@ -12,6 +12,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Use `/data/latex_test` for manual external validation outputs when testing real LaTeX projects.
 - Before polishing, generate a review bundle and inspect `task-review.md` / `task-board.json` so task scope can be reviewed, prioritized, skipped, or merged.
 - Before generating section polish packages, create a paper-summary template from the project map, have the main agent fill the full-paper thesis/contributions/risks/section roles, and validate the completed summary.
+- For real-paper testing, first generate a paper overview HTML from the validated summary and ask the user to verify macro understanding before continuing to section polishing.
 - Generate section polish package templates from inspection data and the validated paper summary; template generation may carry paragraph/caption text and mechanical risks, but specialist agents fill the actual suggestions.
 - Generate a section polish suggestions template from the section package before handing work to a fresh section specialist, so the specialist fills only suggestion fields and preserves source boundaries.
 - Validate section-specialist suggestion JSON against the source section package before merging it into a workbench-ready package. Merging suggestions must not change the editable text default from original text.
