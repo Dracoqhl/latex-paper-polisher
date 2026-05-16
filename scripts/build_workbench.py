@@ -5,6 +5,10 @@ import sys
 from pathlib import Path
 
 
+ROOT = Path(__file__).resolve().parent.parent
+ASSET_DIR = ROOT / "assets" / "workbench"
+
+
 def esc(value: object) -> str:
     return html.escape(str(value), quote=True)
 
@@ -47,55 +51,32 @@ def optional_review_status(payload: dict) -> str:
     </section>"""
 
 
+def script_json(payload: dict) -> str:
+    return json.dumps(payload, ensure_ascii=False).replace("<", "\\u003c")
+
+
+def load_asset(name: str) -> str:
+    return (ASSET_DIR / name).read_text(encoding="utf-8")
+
+
 def render(payload: dict) -> str:
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>LaTeX Paper Polisher</title>
-  <style>
-    body {{ font-family: system-ui, sans-serif; margin: 32px; line-height: 1.55; color: #1f2933; }}
-    main {{ max-width: 1100px; margin: 0 auto; }}
-    h1 {{ font-size: 28px; margin-bottom: 4px; }}
-    .meta {{ color: #52606d; margin-bottom: 24px; }}
-    .grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }}
-    section {{ border: 1px solid #d9e2ec; border-radius: 8px; padding: 16px; background: #fff; }}
-    pre {{ white-space: pre-wrap; overflow-wrap: anywhere; font-family: ui-monospace, monospace; }}
-    .full {{ grid-column: 1 / -1; }}
-    .warning {{ color: #9f580a; }}
-  </style>
-</head>
-<body>
-<main>
-  <h1>Current Paragraph</h1>
-  <div class="meta">{esc(payload.get("paragraph_id", ""))} · {esc(payload.get("source_file", ""))} · {esc(payload.get("section", ""))}</div>
-  <div class="grid">
-    <section>
-      <h2>Original</h2>
-      <pre>{esc(payload.get("original_text", ""))}</pre>
-    </section>
-    <section>
-      <h2>Suggested Revision</h2>
-      <pre>{esc(payload.get("suggested_text", ""))}</pre>
-    </section>
-    <section>
-      <h2>Rationale</h2>
-      <ul>{list_items(payload.get("rationale", []))}</ul>
-    </section>
-    <section>
-      <h2>Warnings</h2>
-      <ul class="warning">{list_items(payload.get("warnings", []))}</ul>
-    </section>
-    <section class="full">
-      <h2>Confirmation</h2>
-      <p>Review this paragraph in the browser, then confirm or revise it in the Codex conversation. This page does not write to source files.</p>
-    </section>
-    {optional_review_status(payload)}
-  </div>
-</main>
-</body>
-</html>
-"""
+    replacements = {
+        "__WORKBENCH_CSS__": load_asset("workbench.css"),
+        "__WORKBENCH_JS__": load_asset("workbench.js"),
+        "__PARAGRAPH_ID__": esc(payload.get("paragraph_id", "")),
+        "__SOURCE_FILE__": esc(payload.get("source_file", "")),
+        "__SECTION_NAME__": esc(payload.get("section", "")),
+        "__ORIGINAL_TEXT__": esc(payload.get("original_text", "")),
+        "__SUGGESTED_TEXT__": esc(payload.get("suggested_text", "")),
+        "__RATIONALE_ITEMS__": list_items(payload.get("rationale", [])),
+        "__WARNING_ITEMS__": list_items(payload.get("warnings", [])),
+        "__OPTIONAL_REVIEW_STATUS__": optional_review_status(payload),
+        "__PAYLOAD_JSON__": script_json(payload),
+    }
+    rendered = load_asset("workbench.html")
+    for token, value in replacements.items():
+        rendered = rendered.replace(token, value)
+    return rendered
 
 
 def main(argv: list[str]) -> int:

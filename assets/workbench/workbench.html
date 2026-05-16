@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LaTeX Paper Polisher</title>
+  <style>
+__WORKBENCH_CSS__
+  </style>
+</head>
+<body>
+<main>
+  <h1>Current Paragraph</h1>
+  <div class="meta">__PARAGRAPH_ID__ &middot; __SOURCE_FILE__ &middot; __SECTION_NAME__</div>
+  <div class="grid">
+    <section>
+      <h2>Original</h2>
+      <pre>__ORIGINAL_TEXT__</pre>
+    </section>
+    <section>
+      <h2>Suggested Revision</h2>
+      <pre>__SUGGESTED_TEXT__</pre>
+    </section>
+    <section>
+      <h2>Rationale</h2>
+      <ul>__RATIONALE_ITEMS__</ul>
+    </section>
+    <section>
+      <h2>Warnings</h2>
+      <ul class="warning">__WARNING_ITEMS__</ul>
+    </section>
+    <section class="full">
+      <h2>Confirmation</h2>
+      <p>Review this paragraph in the browser, then choose a review decision below. This page does not write to source files.</p>
+    </section>
+    __OPTIONAL_REVIEW_STATUS__
+    <section class="full" id="decision-panel">
+      <h2>Interactive Decision</h2>
+      <div class="decision-actions">
+        <button id="accept-decision" type="button">Accept</button>
+        <button id="revise-decision" type="button">Revise</button>
+        <button id="reject-decision" type="button">Reject</button>
+      </div>
+      <label for="review-notes">Review notes</label>
+      <textarea id="review-notes" rows="3"></textarea>
+      <label for="final-text">Final text for revise</label>
+      <textarea id="final-text" rows="8">__SUGGESTED_TEXT__</textarea>
+      <button id="download-decision" type="button">Download Decision JSON</button>
+      <h3>Generated Decision JSON</h3>
+      <pre id="decision-json">{}</pre>
+    </section>
+  </div>
+  <script id="workbench-payload" type="application/json">__PAYLOAD_JSON__</script>
+  <script>
+__WORKBENCH_JS__
+  </script>
+</main>
+</body>
+</html>

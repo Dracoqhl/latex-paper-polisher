@@ -17,6 +17,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Record the main agent's accept, revise, or reject decision before preparing any source writeback candidate.
 - Writeback candidates are staging artifacts only. They require later validation and do not authorize source modification by themselves.
 - First-version HTML integration should display review state and next CLI commands only; it must not directly modify source files.
+- Reusable interactive workbench assets belong in the skill repository under `assets/workbench/`; paper-specific generated HTML and JSON belong in external runtime directories such as `/data/latex_test`.
 
 ## Section Rules
 

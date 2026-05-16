@@ -14,6 +14,14 @@ Update this file whenever a change adds, removes, renames, or materially changes
 
 - `agents/openai.yaml`: Skill display metadata and default prompt text for OpenAI/Codex environments.
 
+## Workbench Assets
+
+Reusable browser workbench assets live under `assets/workbench/`.
+
+- `assets/workbench/workbench.html`: HTML template used by `scripts/build_workbench.py`.
+- `assets/workbench/workbench.css`: Shared workbench styling.
+- `assets/workbench/workbench.js`: Browser-side review decision controls. It generates decision JSON for the user to inspect or download, but it does not write source files.
+
 ## Helper Scripts
 
 All executable helper scripts live under `scripts/`.
@@ -29,7 +37,7 @@ All executable helper scripts live under `scripts/`.
 - `scripts/record_review_decision.py`: Records the main agent's accept, revise, or reject decision for a workbench payload and marks whether it is ready for writeback.
 - `scripts/prepare_writeback_candidate.py`: Converts an accepted or revised main-agent review decision into a writeback candidate JSON without modifying source files.
 - `scripts/run_readonly_real_paper_check.py`: Runs the mapper and task skeleton builder against an external LaTeX project, writes outputs to a chosen test directory, and verifies the source project was not modified.
-- `scripts/build_workbench.py`: Static HTML workbench generation for the current paragraph or scoped text unit, including optional review status and next-command sections.
+- `scripts/build_workbench.py`: Static HTML workbench generation for the current paragraph or scoped text unit. It reads reusable assets from `assets/workbench/`, embeds the current payload, and includes optional review status and next-command sections.
 - `scripts/append_polish_log.py`: Append-only local JSONL log writer for completed polishing actions.
 - `scripts/validate_writeback.py`: Before/after LaTeX construct safety checker for source writeback.
 
@@ -92,6 +100,7 @@ Runtime artifacts must not be committed.
 - Put shared task and agent-output protocols in `references/`, not in scripts.
 - Put design decisions and future implementation plans in `docs/superpowers/`.
 - Put committed test inputs in `tests/fixtures/`.
+- Put reusable workbench HTML/CSS/JS in `assets/workbench/`; put generated paper-specific workbench output outside the repository.
 - Put generated, local, or paper-specific runtime output outside the repository or in ignored directories.
 - Put manual external validation outputs in `/data/latex_test/` when the directory is available.
 - Keep source writeback authority in the main agent workflow; helper scripts may validate or format data, but they should not make semantic polishing decisions.
