@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "mode": "paper_summary",
+  "project_root": "/example/paper",
+  "main_file": "main.tex",
+  "thesis": "The paper studies robust small-model distillation.",
+  "contributions": [
+    "Identifies a quality-utility mismatch.",
+    "Shows that style alignment improves downstream utility."
+  ],
+  "section_map": [
+    {
+      "section_id": "introduction",
+      "title": "Introduction",
+      "source_file": "sections/introduction.tex",
+      "role": "Motivates the problem and states contributions."
+    }
+  ],
+  "terminology": [
+    "Small Language Models",
+    "Quality-Utility Paradox",
+    "Style-Aligned Refinement"
+  ],
+  "macro_risks": [
+    "Avoid overstating evidence before experiments are introduced."
+  ],
+  "structural_suggestions": [
+    "Keep the contribution list aligned with later experiments."
+  ],
+  "polishing_guidance": [
+    "Preserve LaTeX citations, labels, refs, and math.",
+    "Prefer precise academic English over stronger claims."
+  ]
+}

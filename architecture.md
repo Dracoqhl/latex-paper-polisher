@@ -36,6 +36,8 @@ All executable helper scripts live under `scripts/`.
 - `scripts/prepare_workbench_review_state.py`: Merges a workbench payload, main-agent review decision, and writeback candidate into an HTML-ready review-state payload.
 - `scripts/record_review_decision.py`: Records the main agent's accept, revise, or reject decision for a workbench payload and marks whether it is ready for writeback.
 - `scripts/prepare_writeback_candidate.py`: Converts an accepted or revised main-agent review decision into a writeback candidate JSON without modifying source files.
+- `scripts/validate_section_polish_package.py`: Validates section polish package JSON before generating a section workbench.
+- `scripts/build_section_workbench.py`: Generates an interactive section-level HTML workbench from a section polish package.
 - `scripts/run_readonly_real_paper_check.py`: Runs the mapper and task skeleton builder against an external LaTeX project, writes outputs to a chosen test directory, and verifies the source project was not modified.
 - `scripts/build_workbench.py`: Static HTML workbench generation for the current paragraph or scoped text unit. It reads reusable assets from `assets/workbench/`, embeds the current payload, and includes optional review status and next-command sections.
 - `scripts/append_polish_log.py`: Append-only local JSONL log writer for completed polishing actions.
@@ -92,6 +94,7 @@ Runtime artifacts must not be committed.
 - Main-agent review decision JSON under `/data/latex_test/` or a subdirectory of it for manual validation.
 - Writeback candidate JSON under `/data/latex_test/` or a subdirectory of it for manual validation.
 - Workbench review-state payload JSON under `/data/latex_test/` or a subdirectory of it for manual validation.
+- Paper summary, section polish package, section final edits, and generated section workbench HTML under `/data/latex_test/` or another runtime output directory.
 
 ## File Placement Rules
 

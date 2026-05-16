@@ -6,6 +6,88 @@ This document defines the model-led task plan and specialist-agent output schema
 
 The project map is mechanical. It may describe files, anchors, labels, references, citations, captions, and protected regions. It must not decide which prose units should be polished.
 
+## Paper Summary
+
+A paper summary is generated after the main agent reads the full paper. It captures paper-level understanding for later section specialist agents.
+
+Required fields:
+
+```json
+{
+  "schema_version": 1,
+  "mode": "paper_summary",
+  "project_root": "/path/to/paper",
+  "main_file": "main.tex",
+  "thesis": "Main paper claim.",
+  "contributions": [],
+  "section_map": [],
+  "terminology": [],
+  "macro_risks": [],
+  "structural_suggestions": [],
+  "polishing_guidance": []
+}
+```
+
+Paper summaries are context artifacts and do not authorize source edits.
+
+## Section Polish Package
+
+A section polish package is generated after one fresh section-specialist agent context reads one full section plus the paper summary and needed neighboring context.
+
+Required fields:
+
+```json
+{
+  "schema_version": 1,
+  "mode": "section_polish_package",
+  "section_id": "introduction",
+  "section_title": "Introduction",
+  "source_file": "src/1_introduction.tex",
+  "paper_summary_ref": "paper-summary.json",
+  "items": [
+    {
+      "item_id": "intro-p001",
+      "source_file": "src/1_introduction.tex",
+      "line_range": [10, 18],
+      "original_text": "Original paragraph.",
+      "suggested_text": "Suggested revision.",
+      "revision_notes": ["Why this change helps."],
+      "risks": [],
+      "questions": [],
+      "editable_text": "Original paragraph."
+    }
+  ]
+}
+```
+
+`editable_text` must default to `original_text`. The suggested text is not automatically adopted.
+
+## Section Final Edits
+
+The section workbench downloads section-final-edits JSON after the user reviews the whole section.
+
+Required fields:
+
+```json
+{
+  "schema_version": 1,
+  "mode": "section_final_edits",
+  "section_id": "introduction",
+  "section_title": "Introduction",
+  "items": [
+    {
+      "item_id": "intro-p001",
+      "source_file": "src/1_introduction.tex",
+      "line_range": [10, 18],
+      "original_text": "Original paragraph.",
+      "final_text": "User-maintained final paragraph."
+    }
+  ]
+}
+```
+
+Section final edits are staging artifacts. They do not modify source files.
+
 ## Main-Agent Task Plan
 
 The main agent creates and owns the task plan after reading the paper context.

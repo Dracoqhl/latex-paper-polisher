@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "mode": "section_polish_package",
+  "section_id": "introduction",
+  "section_title": "Introduction",
+  "source_file": "sections/introduction.tex",
+  "paper_summary_ref": "paper-summary.json",
+  "items": [
+    {
+      "item_id": "intro-p001",
+      "source_file": "sections/introduction.tex",
+      "line_range": [4, 4],
+      "original_text": "Prior work has studied this topic~\\cite{smith2020}. However, existing methods are often limited when $n$ is large.",
+      "suggested_text": "Prior work has examined this topic~\\cite{smith2020}. However, existing methods remain limited when $n$ is large.",
+      "revision_notes": [
+        "Replaces a generic verb with a more academic one.",
+        "Keeps the citation and inline math unchanged."
+      ],
+      "risks": [],
+      "questions": [],
+      "editable_text": "Prior work has studied this topic~\\cite{smith2020}. However, existing methods are often limited when $n$ is large."
+    },
+    {
+      "item_id": "intro-p002",
+      "source_file": "sections/introduction.tex",
+      "line_range": [6, 6],
+      "original_text": "We propose a compact method that improves robustness.",
+      "suggested_text": "We propose a compact method that improves robustness while preserving computational efficiency.",
+      "revision_notes": [
+        "Adds a more specific benefit for the proposed method."
+      ],
+      "risks": [
+        "Confirm that computational efficiency is supported by later experiments."
+      ],
+      "questions": [
+        "Should this paragraph preview the main contribution list?"
+      ],
+      "editable_text": "We propose a compact method that improves robustness."
+    }
+  ]
+}
