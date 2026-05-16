@@ -19,6 +19,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - First-version HTML integration should display review state and next CLI commands only; it must not directly modify source files.
 - Reusable interactive workbench assets belong in the skill repository under `assets/workbench/`; paper-specific generated HTML and JSON belong in external runtime directories such as `/data/latex_test`.
 - For the section workbench, the editable final-text box defaults to the original paragraph. Original and suggested panels should provide copy buttons, and all final edits are maintained manually by the user in the editable box.
+- For section polishing, use one fresh specialist-agent context per section and reuse it for the whole section package; do not spawn a fresh agent per paragraph by default.
 
 ## Section Rules
 

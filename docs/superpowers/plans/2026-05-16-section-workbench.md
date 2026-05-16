@@ -4,7 +4,7 @@
 
 **Goal:** Build the first section-level browser workbench that loads precomputed section polishing suggestions, lets the user navigate paragraphs locally, manually maintain final text, and download section-final-edits JSON without modifying source files.
 
-**Architecture:** Python scripts remain deterministic artifact generators and validators. Reusable browser assets live under `assets/workbench/`; generated paper-specific HTML and JSON remain outside the repository, typically under `/data/latex_test`. Model-generated paper summary and section polish content are represented as local JSON schemas so later agent steps can produce them consistently.
+**Architecture:** Python scripts remain deterministic artifact generators and validators. Reusable browser assets live under `assets/workbench/`; generated paper-specific HTML and JSON remain outside the repository, typically under `/data/latex_test`. Model-generated paper summary and section polish content are represented as local JSON schemas so later agent steps can produce them consistently. Each paper section should use one fresh specialist-agent context for the whole section, not one agent per paragraph.
 
 **Tech Stack:** Python 3 standard library, pytest, static HTML/CSS/JavaScript, JSON artifacts, existing Codex skill layout.
 
@@ -131,7 +131,7 @@ Add these sections to `references/task-protocol.md` after `## Project Map Bounda
 ```markdown
 ## Paper Summary
 
-A paper summary is generated after the main agent reads the full paper. It captures paper-level understanding for later section and paragraph agents.
+A paper summary is generated after the main agent reads the full paper. It captures paper-level understanding for later section specialist agents.
 
 Required fields:
 
@@ -155,7 +155,7 @@ Paper summaries are context artifacts and do not authorize source edits.
 
 ## Section Polish Package
 
-A section polish package is generated after an agent reads one full section plus the paper summary and needed neighboring context.
+A section polish package is generated after one fresh section-specialist agent context reads one full section plus the paper summary and needed neighboring context.
 
 Required fields:
 
@@ -233,6 +233,7 @@ Add to `references/knowledge.md` confirmed preferences:
 
 ```markdown
 - Section polishing should use a precomputed section package so previous/next paragraph navigation is local and fast. The editable text defaults to original text, with original/suggested copy buttons for manual editing.
+- Use one fresh specialist-agent context per section. Reuse that context for the whole section package instead of dispatching separate agents per paragraph.
 ```
 
 - [ ] **Step 6: Commit protocol fixtures**

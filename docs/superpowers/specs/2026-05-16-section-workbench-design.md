@@ -8,8 +8,8 @@ The polishing workflow should move from per-paragraph model calls to a section-l
 
 - The user specifies a LaTeX paper directory.
 - Before section polishing, the main agent reads the full paper and produces a macro-level understanding.
-- The macro-level summary must be available to later section and paragraph polishing agents.
-- During section polishing, an agent reads the whole section and, when needed, adjacent context or other relevant paragraphs.
+- The macro-level summary must be available to later section polishing agents.
+- During section polishing, each section uses one fresh specialist-agent context. That section agent reads the whole section and, when needed, adjacent context or other relevant paragraphs.
 - The section agent generates all paragraph-level suggestions for the section in one local package.
 - The HTML workbench navigates locally through precomputed section items, so previous/next paragraph movement is fast.
 - The editable final-text box defaults to the original paragraph, not the suggested version.
@@ -45,7 +45,7 @@ This summary is a context artifact. It does not authorize source edits.
 
 ### 2. Section Polish Package
 
-For one selected section, the agent reads:
+For one selected section, the main agent starts one fresh section-specialist context. That section agent reads:
 
 - the paper summary
 - the full section source
