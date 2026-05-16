@@ -24,9 +24,11 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Writeback candidates are staging artifacts only. They require later validation and do not authorize source modification by themselves.
 - First-version HTML integration should display review state and next CLI commands only; it must not directly modify source files.
 - Reusable interactive workbench assets belong in the skill repository under `assets/workbench/`; paper-specific generated HTML and JSON belong in external runtime directories such as `/data/latex_test`.
-- For the section workbench, the top Original and Suggested Revision panels should show the whole section. The editable final-text box should show only the current paragraph and default to that paragraph's original text. Original and suggested section panels should provide copy buttons, and all final edits are maintained manually by the user in the editable box.
+- For the section workbench, prioritize the paragraph-by-paragraph polishing workflow. The visible core should be current original paragraph, current suggested revision, one merged Suggestions area, Final Text, and Polishing Agent Discussion.
+- Do not split section-workbench feedback into separate Revision Notes, Risks, and Questions panels; merge them into a single Suggestions area while preserving labels in the text.
+- Do not show section-final-edits JSON as a visible panel in the section workbench. Keep JSON generation/download available behind Submit Whole Section.
 - For section polishing, use one fresh specialist-agent context per section and reuse it for the whole section package; do not spawn a fresh agent per paragraph by default.
-- Section polishing should use a precomputed section package so previous/next paragraph navigation is local and fast. The editable text defaults to original text, with original/suggested copy buttons for manual editing.
+- Section polishing should use a precomputed section package so previous/next paragraph navigation is local and fast. The editable text defaults to original text, with current original/suggested copy buttons for manual editing.
 - Validate downloaded section-final-edits JSON against its source section package before preparing any writeback candidate.
 - Section writeback candidates are still staging artifacts. They require later explicit validation and user approval before source files are modified.
 - Run section writeback preflight before any source modification. Preflight must confirm exact single matches and LaTeX construct preservation, but it still does not authorize writeback by itself.

@@ -19,8 +19,10 @@ Update this file whenever a change adds, removes, renames, or materially changes
 Reusable browser workbench assets live under `assets/workbench/`.
 
 - `assets/workbench/workbench.html`: HTML template used by `scripts/build_workbench.py`.
-- `assets/workbench/workbench.css`: Shared workbench styling.
+- `assets/workbench/workbench.css`: Shared workbench styling for paragraph and section review pages; section pages should stay compact and paragraph-focused.
 - `assets/workbench/workbench.js`: Browser-side review decision controls. It generates decision JSON for the user to inspect or download, but it does not write source files.
+- `assets/workbench/section-workbench.html`: HTML template used by `scripts/build_section_workbench.py` for section-level, paragraph-by-paragraph polishing review.
+- `assets/workbench/section-workbench.js`: Browser-side controls for section paragraph navigation, current paragraph suggestions, user-maintained final text, discussion notes, and section-final-edits JSON download.
 
 ## Helper Scripts
 

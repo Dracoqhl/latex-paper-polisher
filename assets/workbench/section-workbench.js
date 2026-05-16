@@ -7,19 +7,27 @@ function currentItem() {
   return sectionPackage.items[currentIndex];
 }
 
-function listItems(elementId, values) {
-  const element = document.getElementById(elementId);
+function renderSuggestionList(item) {
+  const element = document.getElementById("suggestions");
   element.innerHTML = "";
-  if (!values || values.length === 0) {
-    const item = document.createElement("li");
-    item.textContent = "None.";
-    element.appendChild(item);
+  const groups = [
+    ["Note", item.revision_notes],
+    ["Risk", item.risks],
+    ["Question", item.questions]
+  ];
+  const values = groups.flatMap(([label, entries]) =>
+    (entries || []).map((entry) => `${label}: ${entry}`)
+  );
+  if (values.length === 0) {
+    const listItem = document.createElement("li");
+    listItem.textContent = "None.";
+    element.appendChild(listItem);
     return;
   }
   values.forEach((value) => {
-    const item = document.createElement("li");
-    item.textContent = value;
-    element.appendChild(item);
+    const listItem = document.createElement("li");
+    listItem.textContent = value;
+    element.appendChild(listItem);
   });
 }
 
@@ -29,21 +37,13 @@ function saveCurrentState() {
   discussions[item.item_id] = document.getElementById("agent-discussion").value;
 }
 
-function renderWholeSection() {
-  const originalText = sectionPackage.items.map((item) => item.original_text).join("\n\n");
-  const suggestedText = sectionPackage.items.map((item) => item.suggested_text || item.original_text).join("\n\n");
-  document.getElementById("section-original-text").textContent = originalText;
-  document.getElementById("section-suggested-text").textContent = suggestedText;
-}
-
 function loadCurrentItem() {
   const item = currentItem();
   document.getElementById("item-counter").textContent = `${currentIndex + 1} / ${sectionPackage.items.length}`;
   document.getElementById("source-location").textContent = `${item.source_file}:${item.line_range[0]}-${item.line_range[1]}`;
   document.getElementById("current-original-text").textContent = item.original_text;
-  listItems("revision-notes", item.revision_notes);
-  listItems("risks", item.risks);
-  listItems("questions", item.questions);
+  document.getElementById("current-suggested-text").textContent = item.suggested_text || item.original_text;
+  renderSuggestionList(item);
   document.getElementById("final-text").value = finalTexts[item.item_id] ?? item.editable_text ?? item.original_text;
   document.getElementById("agent-discussion").value = discussions[item.item_id] ?? "";
 }
@@ -79,7 +79,6 @@ function buildFinalEdits() {
 function downloadSectionFinalEdits() {
   const edits = buildFinalEdits();
   const text = JSON.stringify(edits, null, 2);
-  document.getElementById("section-final-edits").textContent = text;
   const blob = new Blob([text], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -89,10 +88,9 @@ function downloadSectionFinalEdits() {
   URL.revokeObjectURL(url);
 }
 
-document.getElementById("copy-section-original").addEventListener("click", () => copyText("section-original-text"));
-document.getElementById("copy-section-suggested").addEventListener("click", () => copyText("section-suggested-text"));
+document.getElementById("copy-current-original").addEventListener("click", () => copyText("current-original-text"));
+document.getElementById("copy-current-suggested").addEventListener("click", () => copyText("current-suggested-text"));
 document.getElementById("previous-item").addEventListener("click", () => goTo(-1));
 document.getElementById("next-item").addEventListener("click", () => goTo(1));
 document.getElementById("submit-section").addEventListener("click", downloadSectionFinalEdits);
-renderWholeSection();
 loadCurrentItem();

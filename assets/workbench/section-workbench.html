@@ -14,53 +14,39 @@ __WORKBENCH_CSS__
     <div class="meta">__SECTION_TITLE__ · <span id="item-counter"></span> · <span id="source-location"></span></div>
   </header>
 
-  <div class="grid">
+  <div class="grid paragraph-grid">
     <section>
       <div class="panel-title">
-        <h2>Whole Section Original</h2>
-        <button id="copy-section-original" type="button">Copy</button>
+        <h2>Current Original</h2>
+        <button id="copy-current-original" type="button">Copy</button>
       </div>
-      <pre id="section-original-text" class="section-text"></pre>
+      <pre id="current-original-text" class="paragraph-text"></pre>
     </section>
     <section>
       <div class="panel-title">
-        <h2>Whole Section Suggested Revision</h2>
-        <button id="copy-section-suggested" type="button">Copy</button>
+        <h2>Suggested Revision</h2>
+        <button id="copy-current-suggested" type="button">Copy</button>
       </div>
-      <pre id="section-suggested-text" class="section-text"></pre>
+      <pre id="current-suggested-text" class="paragraph-text"></pre>
+    </section>
+    <section class="full compact-panel">
+      <h2>Suggestions</h2>
+      <ul id="suggestions" class="suggestions-list"></ul>
     </section>
     <section class="full">
-      <h2>Current Paragraph Original</h2>
-      <pre id="current-original-text"></pre>
-    </section>
-    <section class="full">
-      <h2>Revision Notes</h2>
-      <ol id="revision-notes"></ol>
-    </section>
-    <section>
-      <h2>Risks</h2>
-      <ul id="risks" class="warning"></ul>
-    </section>
-    <section>
-      <h2>Questions</h2>
-      <ul id="questions"></ul>
-    </section>
-    <section class="full">
-      <h2>Final Text</h2>
-      <textarea id="final-text" rows="10"></textarea>
-      <div class="decision-actions">
-        <button id="previous-item" type="button">Previous Paragraph</button>
-        <button id="next-item" type="button">Next Paragraph</button>
-        <button id="submit-section" type="button">Submit Whole Section</button>
+      <div class="panel-title">
+        <h2>Final Text</h2>
+        <div class="decision-actions">
+          <button id="previous-item" type="button">Previous Paragraph</button>
+          <button id="next-item" type="button">Next Paragraph</button>
+          <button id="submit-section" type="button">Submit Whole Section</button>
+        </div>
       </div>
+      <textarea id="final-text" rows="8"></textarea>
     </section>
     <section class="full">
       <h2>Polishing Agent Discussion</h2>
       <textarea id="agent-discussion" rows="5" placeholder="Discuss the current paragraph with the polishing agent. This does not automatically change final text."></textarea>
-    </section>
-    <section class="full">
-      <h2>Section Final Edits JSON</h2>
-      <pre id="section-final-edits">{}</pre>
     </section>
   </div>
   <script id="section-polish-package" type="application/json">__SECTION_PACKAGE_JSON__</script>
