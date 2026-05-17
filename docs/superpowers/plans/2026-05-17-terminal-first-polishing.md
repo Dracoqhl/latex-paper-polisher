@@ -100,7 +100,7 @@ Use non-destructive `git -C PAPER_ROOT status --short`, `git -C PAPER_ROOT branc
 
 Before direct source edits, run the guard. If the paper repo has unrelated dirty files, stop and ask the user how to proceed.
 
-- [ ] **Step 4: Verify and commit**
+- [x] **Step 4: Verify and commit**
 
 Run `pytest tests/test_check_paper_git.py -q`, then full `pytest -q`, then commit in the tool repository.
 
@@ -120,7 +120,7 @@ Test that the helper records target section, source files touched, original exce
 
 Write JSONL under a caller-provided path, usually inside an ignored paper-local log directory. The helper must not edit source files or commit.
 
-- [ ] **Step 3: Verify and commit**
+- [x] **Step 3: Verify and commit**
 
 Run targeted tests, full tests, and commit.
 
@@ -148,6 +148,6 @@ Document the direct-edit loop:
 
 Add the new workflow reference to the skill references.
 
-- [ ] **Step 3: Verify and commit**
+- [x] **Step 3: Verify and commit**
 
 Run docs grep checks and full tests, then commit.
