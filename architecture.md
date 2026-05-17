@@ -16,7 +16,7 @@ Update this file whenever a change adds, removes, renames, or materially changes
 
 ## User Interaction Model
 
-The active polishing workflow is Terminal-first. Codex reads LaTeX source and surrounding context, discusses section or paragraph revisions with the user in the terminal, and edits source files only after explicit user confirmation.
+The active polishing workflow is Terminal-first. Codex reads LaTeX source and surrounding context, discusses section or paragraph revisions with the user in the terminal, and edits source files only after explicit user confirmation. Mechanical consistency edits are grouped into a single review item with per-location context before source writeback.
 
 Browser HTML workbench assets and generators are intentionally not part of the active architecture. Historical HTML plans remain in `docs/superpowers/` only as project history.
 
@@ -92,6 +92,7 @@ Runtime artifacts must not be committed.
 - Specialist suggestion templates and returned suggestion JSON files under `/data/latex_test/` or a subdirectory of it.
 - Paper summary templates, completed paper summaries, section polish package templates, section-specialist suggestion JSON, and merged section polish packages under `/data/latex_test/` or another runtime output directory.
 - Paper-specific local logs under the paper project or another ignored runtime directory.
+- Paper-specific ad hoc review surfaces, such as temporary current-review Markdown or HTML files, under the paper project or another ignored runtime directory.
 
 ## File Placement Rules
 

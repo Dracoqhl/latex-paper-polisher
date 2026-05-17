@@ -18,6 +18,7 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Validate specialist suggestion JSON before using it in terminal discussion. Specialist suggestions remain advisory and must not directly edit source.
 - After the user confirms final wording, Codex should directly edit the paper source file, validate, review `git diff`, and commit in the paper project's own git repository.
 - For polishing or rebuttal-driven edits, Codex should first present a review package with the current source text, proposed revision, rationale, and risks/questions. Source files should be edited only after the user accepts the proposed change.
+- Batch mechanical edits, such as terminology normalization or Chinese punctuation/full-width symbol cleanup, should be merged into one review item. Codex should list every affected location with local context and before/after replacements, then wait for user confirmation before editing source.
 - Push paper-project commits when the user has explicitly requested pushing for that project or change.
 - The tool repository has its own git history for scripts, docs, tests, and skill changes. Paper repositories have separate git histories for paper-source edits.
 
@@ -32,6 +33,7 @@ Record terms, abbreviations, method names, dataset names, variables, and phrases
 ## Common Errors
 
 - Detect and replace Chinese punctuation, Chinese characters, and full-width symbols in English prose.
+- Do not silently apply batch consistency fixes. Present grouped findings for confirmation first.
 - Avoid unnecessary overclaiming.
 
 ## Scoped Notes

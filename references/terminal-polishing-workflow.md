@@ -46,6 +46,8 @@ Before editing source, present a compact review package for each proposed change
 
 This package is the decision surface. Do not edit `.tex` files from an unreviewed proposal, even when the change appears mechanical. For broad tasks, split the work into small packages that the user can accept, reject, or revise independently.
 
+For mechanical consistency edits, combine related occurrences into one batch review package instead of presenting each occurrence separately. Examples include terminology normalization, Chinese punctuation cleanup, and full-width symbol cleanup. The batch package must list every affected location with concise local context and a before/after replacement. Apply the batch only after the user confirms it.
+
 ## 5. Discuss One Semantic Unit
 
 Work on one unit at a time. Present the original text, the proposed revision, and the reason for the change. The user may ask for alternative styles, stronger or weaker claims, or narrower terminology.
