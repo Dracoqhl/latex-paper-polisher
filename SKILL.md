@@ -19,13 +19,14 @@ Polish academic English LaTeX papers while preserving technical meaning and LaTe
 6. Main agent gives a concise macro or section-level analysis before polishing: section role, paragraph purposes, flow issues, terminology risks, and suggested edit order.
 7. User chooses a target section, paragraph, or semantic unit in natural language.
 8. Main agent splits the target semantically. Short paragraphs are polished as one unit; long paragraphs are split by rhetorical purpose.
-9. Main agent and user discuss wording in the terminal until the user confirms the final text.
-10. Main agent directly edits the LaTeX source after confirmation.
-11. Validate the edit with `scripts/validate_writeback.py` when before/after snippets are available, inspect `git diff`, and run any project-appropriate checks.
-12. Append a local-only log entry with `scripts/record_terminal_polish_session.py` when a polishing unit is finalized and committed.
-13. Commit exactly the confirmed paper-source change in the paper project's own git repository. Do not push unless the user asks.
-14. Update this tool repository's `references/knowledge.md` when user preferences or recurring writing rules change.
-15. Update this tool repository's `architecture.md` when files, directories, helper responsibilities, or workflow artifacts change.
+9. Main agent presents a review package before editing: file location, current source text, proposed revision, rationale, and risks/questions. Do not edit source from an unreviewed proposal.
+10. Main agent and user discuss wording in the terminal until the user explicitly accepts, rejects, or revises each proposed change.
+11. Main agent directly edits the LaTeX source only for accepted changes.
+12. Validate the edit with `scripts/validate_writeback.py` when before/after snippets are available, inspect `git diff`, and run any project-appropriate checks.
+13. Append a local-only log entry with `scripts/record_terminal_polish_session.py` when a polishing unit is finalized and committed.
+14. Commit exactly the confirmed paper-source change in the paper project's own git repository. Push only when the user has requested pushing for that project or change.
+15. Update this tool repository's `references/knowledge.md` when user preferences or recurring writing rules change.
+16. Update this tool repository's `architecture.md` when files, directories, helper responsibilities, or workflow artifacts change.
 
 ## Defaults
 
@@ -46,7 +47,8 @@ Polish academic English LaTeX papers while preserving technical meaning and LaTe
 - Stop before committing if unrelated user changes are present.
 - Keep logs, generated context, and temporary artifacts out of Git.
 - Commit each confirmed paper-source edit locally in the paper repository with a clear message.
-- Do not push paper changes unless the user explicitly asks.
+- For polishing or rebuttal-driven edits, always show a review package and wait for user confirmation before editing source.
+- Push paper changes only when the user has explicitly requested pushing for that project or change.
 - When files, directories, helper responsibilities, or workflow artifacts change, update `architecture.md`.
 - When user preferences, terminology, recurring errors, or process preferences change, update `references/knowledge.md`.
 

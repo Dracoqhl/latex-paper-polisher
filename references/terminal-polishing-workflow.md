@@ -34,19 +34,31 @@ Before proposing wording, give a concise analysis:
 
 Do not let Python decide semantic split boundaries. The main agent decides whether to polish a whole paragraph or split a long paragraph by rhetorical purpose.
 
-## 4. Discuss One Semantic Unit
+## 4. Present A Review Package
+
+Before editing source, present a compact review package for each proposed change:
+
+- file path and section
+- current source text
+- proposed revised text
+- rationale for the change
+- risks or questions that need user confirmation
+
+This package is the decision surface. Do not edit `.tex` files from an unreviewed proposal, even when the change appears mechanical. For broad tasks, split the work into small packages that the user can accept, reject, or revise independently.
+
+## 5. Discuss One Semantic Unit
 
 Work on one unit at a time. Present the original text, the proposed revision, and the reason for the change. The user may ask for alternative styles, stronger or weaker claims, or narrower terminology.
 
 Do not edit source until the user confirms the final wording.
 
-## 5. Apply Confirmed Source Edit
+## 6. Apply Confirmed Source Edit
 
-After confirmation, edit the LaTeX source directly. Preserve commands, citations, labels, refs, math, comments, and intentional formatting.
+After confirmation, edit the LaTeX source directly and only for the accepted items. Preserve commands, citations, labels, refs, math, comments, and intentional formatting.
 
 Keep edits scoped to the confirmed unit. If a broader nearby edit becomes necessary, explain it before editing.
 
-## 6. Validate And Inspect
+## 7. Validate And Inspect
 
 When before/after snippets are available, run:
 
@@ -62,7 +74,7 @@ git -C /path/to/paper diff -- path/to/source.tex
 
 Run project-specific build or lint checks when available and proportional to the edit.
 
-## 7. Commit In Paper Repository
+## 8. Commit In Paper Repository
 
 Commit each confirmed paper-source change in the paper project's own git repository:
 
@@ -71,9 +83,9 @@ git -C /path/to/paper add path/to/source.tex
 git -C /path/to/paper commit -m "polish: refine abstract motivation"
 ```
 
-Do not push unless the user explicitly asks.
+Push only when the user has requested pushing for that project or change.
 
-## 8. Record Session And Knowledge
+## 9. Record Session And Knowledge
 
 If the edit is substantive, append a terminal polishing session log after the paper commit:
 

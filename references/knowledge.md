@@ -17,7 +17,8 @@ This file is maintained automatically during paper polishing sessions. The user 
 - For section polishing, use one fresh specialist-agent context per section when specialist help is useful; specialist agents remain suggestion-only and must not edit files.
 - Validate specialist suggestion JSON before using it in terminal discussion. Specialist suggestions remain advisory and must not directly edit source.
 - After the user confirms final wording, Codex should directly edit the paper source file, validate, review `git diff`, and commit in the paper project's own git repository.
-- Do not push paper-project commits unless the user explicitly asks.
+- For polishing or rebuttal-driven edits, Codex should first present a review package with the current source text, proposed revision, rationale, and risks/questions. Source files should be edited only after the user accepts the proposed change.
+- Push paper-project commits when the user has explicitly requested pushing for that project or change.
 - The tool repository has its own git history for scripts, docs, tests, and skill changes. Paper repositories have separate git histories for paper-source edits.
 
 ## Section Rules
