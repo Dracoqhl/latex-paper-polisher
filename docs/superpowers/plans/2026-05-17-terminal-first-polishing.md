@@ -131,7 +131,7 @@ Run targeted tests, full tests, and commit.
 - Modify: `SKILL.md`
 - Modify: `architecture.md`
 
-- [ ] **Step 1: Write workflow reference**
+- [x] **Step 1: Write workflow reference**
 
 Document the direct-edit loop:
 
@@ -144,7 +144,7 @@ Document the direct-edit loop:
 7. Commit in the paper repo.
 8. Update knowledge when preferences change.
 
-- [ ] **Step 2: Link from `SKILL.md`**
+- [x] **Step 2: Link from `SKILL.md`**
 
 Add the new workflow reference to the skill references.
 

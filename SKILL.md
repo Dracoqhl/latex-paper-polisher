@@ -13,18 +13,19 @@ Polish academic English LaTeX papers while preserving technical meaning and LaTe
 
 1. Inspect the current directory as a LaTeX project.
 2. Use `scripts/inspect_latex_project.py --map` to build a mechanical project map.
-3. Treat the map as source navigation only. Python must not decide polishing units.
-4. Main agent reads the main file, section files, references, and relevant project context.
-5. Main agent gives a concise macro or section-level analysis before polishing: section role, paragraph purposes, flow issues, terminology risks, and suggested edit order.
-6. User chooses a target section, paragraph, or semantic unit in natural language.
-7. Main agent splits the target semantically. Short paragraphs are polished as one unit; long paragraphs are split by rhetorical purpose.
-8. Main agent and user discuss wording in the terminal until the user confirms the final text.
-9. Main agent directly edits the LaTeX source after confirmation.
-10. Validate the edit with `scripts/validate_writeback.py` when before/after snippets are available, inspect `git diff`, and run any project-appropriate checks.
-11. Append a local-only log entry with `scripts/append_polish_log.py` when a polishing unit is finalized.
-12. Commit exactly the confirmed paper-source change in the paper project's own git repository. Do not push unless the user asks.
-13. Update this tool repository's `references/knowledge.md` when user preferences or recurring writing rules change.
-14. Update this tool repository's `architecture.md` when files, directories, helper responsibilities, or workflow artifacts change.
+3. Follow `references/terminal-polishing-workflow.md` for the direct-edit safety loop.
+4. Treat the map as source navigation only. Python must not decide polishing units.
+5. Main agent reads the main file, section files, references, and relevant project context.
+6. Main agent gives a concise macro or section-level analysis before polishing: section role, paragraph purposes, flow issues, terminology risks, and suggested edit order.
+7. User chooses a target section, paragraph, or semantic unit in natural language.
+8. Main agent splits the target semantically. Short paragraphs are polished as one unit; long paragraphs are split by rhetorical purpose.
+9. Main agent and user discuss wording in the terminal until the user confirms the final text.
+10. Main agent directly edits the LaTeX source after confirmation.
+11. Validate the edit with `scripts/validate_writeback.py` when before/after snippets are available, inspect `git diff`, and run any project-appropriate checks.
+12. Append a local-only log entry with `scripts/record_terminal_polish_session.py` when a polishing unit is finalized and committed.
+13. Commit exactly the confirmed paper-source change in the paper project's own git repository. Do not push unless the user asks.
+14. Update this tool repository's `references/knowledge.md` when user preferences or recurring writing rules change.
+15. Update this tool repository's `architecture.md` when files, directories, helper responsibilities, or workflow artifacts change.
 
 ## Defaults
 
@@ -52,6 +53,7 @@ Polish academic English LaTeX papers while preserving technical meaning and LaTe
 ## References
 
 - Section-specific defaults: `references/section-style-rules.md`
+- Terminal-first workflow: `references/terminal-polishing-workflow.md`
 - LaTeX preservation rules: `references/latex-preservation.md`
 - Log format: `references/log-schema.md`
 - Task and specialist-agent protocol: `references/task-protocol.md`

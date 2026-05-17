@@ -50,6 +50,7 @@ Future scripts should stay small and deterministic. If a script starts making wr
 Reference material lives under `references/`.
 
 - `references/knowledge.md`: Evolving user preferences, terminology, common errors, and scoped notes learned during polishing sessions.
+- `references/terminal-polishing-workflow.md`: Direct-edit Terminal-first polishing workflow, including paper git guard, context reading, semantic-unit discussion, validation, paper-repo commit, and session logging.
 - `references/section-style-rules.md`: Default academic writing conventions by paper section.
 - `references/latex-preservation.md`: Rules for preserving LaTeX constructs during review and writeback.
 - `references/log-schema.md`: Local polish log schema and storage policy.
