@@ -40,6 +40,7 @@ All executable helper scripts live under `scripts/`.
 - `scripts/validate_section_polish_package.py`: Validates section polish package JSON for optional section-specialist suggestion workflows.
 - `scripts/run_readonly_real_paper_check.py`: Runs the mapper and task skeleton builder against an external LaTeX project, writes outputs to a chosen test directory, and verifies the source project was not modified.
 - `scripts/append_polish_log.py`: Append-only local JSONL log writer for completed polishing actions.
+- `scripts/record_terminal_polish_session.py`: Append-only terminal polishing session logger. It records confirmed semantic-unit edits with excerpt hashes, validation summaries, paper commit hashes, and knowledge updates.
 - `scripts/validate_writeback.py`: Before/after LaTeX construct safety checker for source writeback.
 
 Future scripts should stay small and deterministic. If a script starts making writing-quality, paper-structure, polishing-priority, or source-edit decisions, move that responsibility back to the main agent workflow and document the boundary here.

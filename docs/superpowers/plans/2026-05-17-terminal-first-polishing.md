@@ -112,11 +112,11 @@ Run `pytest tests/test_check_paper_git.py -q`, then full `pytest -q`, then commi
 - Modify: `references/log-schema.md`
 - Modify: `architecture.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Test that the helper records target section, source files touched, original excerpt hash, final excerpt hash, validation command summary, paper commit hash, and user preference updates.
 
-- [ ] **Step 2: Implement append-only session logging**
+- [x] **Step 2: Implement append-only session logging**
 
 Write JSONL under a caller-provided path, usually inside an ignored paper-local log directory. The helper must not edit source files or commit.
 
