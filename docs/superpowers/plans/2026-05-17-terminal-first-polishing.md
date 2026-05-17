@@ -77,7 +77,7 @@ Record the user preference for terminal-native collaboration and remove active b
 - Modify: `architecture.md`
 - Modify: `references/task-protocol.md`
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Test that `scripts/check_paper_git.py PAPER_ROOT` reports:
 
@@ -92,11 +92,11 @@ Test that `scripts/check_paper_git.py PAPER_ROOT` reports:
 
 for a clean fixture git repository, and returns `ok: false` when the target directory is not a git repository.
 
-- [ ] **Step 2: Implement git guard**
+- [x] **Step 2: Implement git guard**
 
 Use non-destructive `git -C PAPER_ROOT status --short`, `git -C PAPER_ROOT branch --show-current`, and `git -C PAPER_ROOT rev-parse --show-toplevel`. Do not initialize git automatically unless the user explicitly asks.
 
-- [ ] **Step 3: Document usage**
+- [x] **Step 3: Document usage**
 
 Before direct source edits, run the guard. If the paper repo has unrelated dirty files, stop and ask the user how to proceed.
 

@@ -6,6 +6,29 @@ This document defines the model-led task plan and specialist-agent output schema
 
 The project map is mechanical. It may describe files, anchors, labels, references, citations, captions, and protected regions. It must not decide which prose units should be polished.
 
+## Paper Git Guard
+
+Before directly editing a paper source file, run:
+
+```bash
+python scripts/check_paper_git.py /path/to/paper
+```
+
+The guard is read-only. It reports whether the paper directory is a git repository, the repository root, current branch, and dirty files:
+
+```json
+{
+  "ok": true,
+  "is_git_repo": true,
+  "repo_root": "/path/to/paper",
+  "branch": "main",
+  "dirty_files": [],
+  "errors": []
+}
+```
+
+If `is_git_repo` is false, ask the user before initializing git. If `dirty_files` contains unrelated changes, stop and ask the user whether to commit, ignore, or review those changes before polishing.
+
 ## Paper Summary
 
 A paper summary is generated after the main agent reads the full paper. It captures paper-level understanding for later section specialist agents.

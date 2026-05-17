@@ -25,6 +25,7 @@ Browser HTML workbench assets and generators are intentionally not part of the a
 All executable helper scripts live under `scripts/`.
 
 - `scripts/inspect_latex_project.py`: Mechanical LaTeX project inspection and `--map` project-map generation. It may discover files, sections, paragraphs, captions, labels, refs, citations, and math spans, but it must not be treated as the semantic authority for polishing units.
+- `scripts/check_paper_git.py`: Read-only paper repository guard. It reports whether a target paper directory is a git repository, the repository root, current branch, and dirty files before any direct source edit.
 - `scripts/build_task_skeleton.py`: Generates a mechanical starter task skeleton from a project map. The skeleton requires main-agent review before use.
 - `scripts/prepare_review_bundle.py`: Generates project map, task skeleton, task board, review Markdown, and read-only summary for human task-decomposition review.
 - `scripts/prepare_paper_summary_template.py`: Generates a fillable paper-summary template from a mechanical project map after the main agent has inspected the full-paper structure.
@@ -102,3 +103,4 @@ Runtime artifacts must not be committed.
 - Put manual external validation outputs in `/data/latex_test/` when the directory is available.
 - Keep source writeback authority in the main agent workflow; helper scripts may validate or format data, but they should not make semantic polishing decisions or apply source edits.
 - Manage paper-source edits in each paper project's own git repository. Manage tool, documentation, and test changes in this repository.
+- Run `scripts/check_paper_git.py` against a paper project before direct source edits. If the target is not a git repository, initialize git only after explicit user approval. If unrelated dirty files are present, stop and ask how to proceed.
