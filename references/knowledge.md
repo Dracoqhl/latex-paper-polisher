@@ -10,29 +10,15 @@ This file is maintained automatically during paper polishing sessions. The user 
 - Python helpers should not own semantic paragraph splitting. They should provide source maps and validation only; the main agent should decompose polishing tasks after reading the paper.
 - Specialist agents are suggestion-only by default. The main agent keeps exclusive writeback authority and reviews all suggestions before presenting final text to the user.
 - Use `/data/latex_test` for manual external validation outputs when testing real LaTeX projects.
-- Before polishing, generate a review bundle and inspect `task-review.md` / `task-board.json` so task scope can be reviewed, prioritized, skipped, or merged.
-- Before generating section polish packages, create a paper-summary template from the project map, have the main agent fill the full-paper thesis/contributions/risks/section roles, and validate the completed summary.
-- For real-paper testing, first generate a paper overview HTML from the validated summary and ask the user to verify macro understanding before continuing to section polishing.
-- Generate section polish package templates from inspection data and the validated paper summary; template generation may carry paragraph/caption text and mechanical risks, but specialist agents fill the actual suggestions.
-- Generate a section polish suggestions template from the section package before handing work to a fresh section specialist, so the specialist fills only suggestion fields and preserves source boundaries.
-- Validate section-specialist suggestion JSON against the source section package before merging it into a workbench-ready package. Merging suggestions must not change the editable text default from original text.
-- For HTML testing, prefer the one-command suggestions-to-workbench wrapper so validation, merge, and page generation stay in sync.
-- Generate a per-task context package before asking a main agent or specialist agent to produce polishing suggestions.
-- Generate and validate a specialist suggestion JSON before the main agent reviews or presents specialist output.
-- Convert only validated specialist suggestions into workbench payloads; workbench HTML is still review-only and does not authorize writeback.
-- Record the main agent's accept, revise, or reject decision before preparing any source writeback candidate.
-- Writeback candidates are staging artifacts only. They require later validation and do not authorize source modification by themselves.
-- First-version HTML integration should display review state and next CLI commands only; it must not directly modify source files.
-- Reusable interactive workbench assets belong in the skill repository under `assets/workbench/`; paper-specific generated HTML and JSON belong in external runtime directories such as `/data/latex_test`.
-- For the section workbench, prioritize the paragraph-by-paragraph polishing workflow. The visible core should be current original paragraph, current suggested revision, one merged Suggestions area, Final Text, and Polishing Agent Discussion.
-- Do not split section-workbench feedback into separate Revision Notes, Risks, and Questions panels; merge them into a single Suggestions area while preserving labels in the text.
-- Do not show section-final-edits JSON as a visible panel in the section workbench. Keep JSON generation/download available behind Submit Whole Section.
-- For section polishing, use one fresh specialist-agent context per section and reuse it for the whole section package; do not spawn a fresh agent per paragraph by default.
-- Section polishing should use a precomputed section package so previous/next paragraph navigation is local and fast. The editable text defaults to original text, with current original/suggested copy buttons for manual editing.
-- Validate downloaded section-final-edits JSON against its source section package before preparing any writeback candidate.
-- Section writeback candidates are still staging artifacts. They require later explicit validation and user approval before source files are modified.
-- Run section writeback preflight before any source modification. Preflight must confirm exact single matches and LaTeX construct preservation, but it still does not authorize writeback by itself.
-- Section writeback dry-run reports may show unified diffs for review, but dry-run mode must not modify paper source files.
+- Before polishing a real paper, Codex should inspect the paper tree and read enough source context to form a paper-level or section-level understanding before suggesting text changes.
+- The active workflow is Terminal-first. The user names a section or semantic target, Codex analyzes section role, paragraph purposes, flow issues, terminology risks, and likely edit order in the terminal.
+- Do not maintain a separate HTML polishing workbench as the default workflow. The terminal conversation is the primary interface.
+- Short paragraphs can be polished as one unit. Long paragraphs should be split by semantic or rhetorical purpose before revision.
+- For section polishing, use one fresh specialist-agent context per section when specialist help is useful; specialist agents remain suggestion-only and must not edit files.
+- Validate specialist suggestion JSON before using it in terminal discussion. Specialist suggestions remain advisory and must not directly edit source.
+- After the user confirms final wording, Codex should directly edit the paper source file, validate, review `git diff`, and commit in the paper project's own git repository.
+- Do not push paper-project commits unless the user explicitly asks.
+- The tool repository has its own git history for scripts, docs, tests, and skill changes. Paper repositories have separate git histories for paper-source edits.
 
 ## Section Rules
 

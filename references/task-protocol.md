@@ -30,7 +30,7 @@ Required fields:
 
 Generate the initial paper summary template from a project map, then have the main agent fill it after reading the full paper. Validate the completed summary before any section specialist uses it as context.
 
-Paper summaries are context artifacts and do not authorize source edits. Render a paper overview HTML from the validated summary and have the user review the macro understanding before generating section-level polishing work.
+Paper summaries are context artifacts and do not authorize source edits. Use them as terminal discussion context when the user asks to improve a section or paper-level framing.
 
 ## Section Polish Package
 
@@ -92,114 +92,7 @@ Required fields:
 }
 ```
 
-Generated suggestion templates leave `suggested_text` empty and list fields empty; they are intentionally invalid until the section specialist fills them. Validate section polish suggestions against the source package before merging them into a workbench-ready section polish package. Merging fills `suggested_text`, `revision_notes`, `risks`, and `questions`, but keeps `editable_text` equal to `original_text`.
-For browser review, prefer the wrapper that validates suggestions, writes the merged package, and generates the section workbench HTML in one command so manual testing uses a single artifact chain.
-
-## Section Final Edits
-
-The section workbench downloads section-final-edits JSON after the user reviews the whole section.
-
-Required fields:
-
-```json
-{
-  "schema_version": 1,
-  "mode": "section_final_edits",
-  "section_id": "introduction",
-  "section_title": "Introduction",
-  "items": [
-    {
-      "item_id": "intro-p001",
-      "source_file": "src/1_introduction.tex",
-      "line_range": [10, 18],
-      "original_text": "Original paragraph.",
-      "final_text": "User-maintained final paragraph."
-    }
-  ]
-}
-```
-
-Section final edits are staging artifacts. They do not modify source files. Before any later writeback preparation, validate section final edits against the source section polish package so item order, source locations, original text, and non-empty final text are confirmed.
-
-## Section Writeback Candidate
-
-A section writeback candidate is generated only after section final edits pass validation against the source section polish package.
-
-Required fields:
-
-```json
-{
-  "schema_version": 1,
-  "mode": "section_writeback_candidate",
-  "section_id": "introduction",
-  "section_title": "Introduction",
-  "source_file": "src/1_introduction.tex",
-  "source_files": ["src/1_introduction.tex"],
-  "items": [
-    {
-      "item_id": "intro-p001",
-      "source_file": "src/1_introduction.tex",
-      "line_range": [10, 18],
-      "original_text": "Original paragraph.",
-      "final_text": "User-maintained final paragraph."
-    }
-  ],
-  "validation_required": true,
-  "source_write_permitted": false,
-  "metadata": {}
-}
-```
-
-Section writeback candidates are staging artifacts. They do not modify source files and still require explicit writeback validation and user approval.
-
-## Section Writeback Preflight
-
-A section writeback preflight checks a section writeback candidate against a paper directory without modifying source files.
-
-It verifies that each `original_text` appears exactly once in its target source file and compares LaTeX construct counts between `original_text` and `final_text`.
-
-Preflight output contains:
-
-```json
-{
-  "ok": true,
-  "mode": "section_writeback_preflight",
-  "section_id": "introduction",
-  "project_root": "/path/to/paper",
-  "source_write_permitted": false,
-  "items": [],
-  "errors": []
-}
-```
-
-Passing preflight does not apply edits. It is evidence for a later explicitly approved writeback step.
-
-## Section Writeback Dry Run
-
-A section writeback dry run computes the source changes that would be applied from a preflight-passing section writeback candidate.
-
-It produces a report with per-file unified diffs and never modifies source files:
-
-```json
-{
-  "ok": true,
-  "mode": "section_writeback_apply_dry_run",
-  "section_id": "introduction",
-  "dry_run": true,
-  "source_write_permitted": false,
-  "files": [
-    {
-      "source_file": "src/1_introduction.tex",
-      "item_count": 2,
-      "changed": true,
-      "unified_diff": "--- a/src/1_introduction.tex\n+++ b/src/1_introduction.tex\n"
-    }
-  ],
-  "errors": []
-}
-```
-
-Dry-run reports are for review only. Actual source writeback requires a separate explicit command and user approval.
+Generated suggestion templates leave `suggested_text` empty and list fields empty; they are intentionally invalid until the section specialist fills them. Validate section polish suggestions against the source package before using them in terminal discussion. Merging fills `suggested_text`, `revision_notes`, `risks`, and `questions`, but keeps `editable_text` equal to `original_text`.
 
 ## Main-Agent Task Plan
 
@@ -274,105 +167,11 @@ Specialist agents fill only these review fields:
 
 After receiving a suggestion, validate it against the task context. Validation only checks schema and source-boundary consistency; it does not decide whether the prose is good enough. The main agent must still review meaning, terminology, paper-level consistency, and LaTeX preservation before presenting text to the user.
 
-## Workbench Payload
+## Terminal Revision Confirmation
 
-A validated specialist suggestion may be converted into a workbench payload. The payload is the bridge between structured specialist output and the HTML workbench.
+For the active Terminal-first workflow, no browser payload or staged writeback candidate is required. The main agent presents analysis and proposed wording in the terminal, discusses revisions with the user, and edits source only after the user confirms the final text.
 
-Workbench payloads contain:
-
-```json
-{
-  "paragraph_id": "introduction-section-polish",
-  "source_file": "src/1_introduction.tex",
-  "section": "Polish Introduction",
-  "original_text": "Original source text.",
-  "suggested_text": "Suggested revision.",
-  "rationale": ["Reason for the change."],
-  "warnings": ["Risk: ...", "Question: ..."],
-  "metadata": {}
-}
-```
-
-The workbench remains review-only. Creating a payload or HTML page does not authorize source writeback.
-
-## Workbench Review State
-
-A workbench review-state payload merges the review-only text payload, the main-agent decision, and the writeback candidate status. It exists so the HTML workbench can show the current pipeline state and exact next CLI commands without directly modifying source files.
-
-It may add these fields to the workbench payload:
-
-```json
-{
-  "review_status": {
-    "decision": "accept",
-    "ready_for_writeback": true,
-    "review_notes": "Main agent accepts specialist suggestion."
-  },
-  "writeback_candidate": {
-    "available": true,
-    "validation_required": true,
-    "source_write_permitted": false,
-    "line_range": [1, 30]
-  },
-  "next_commands": ["python scripts/prepare_writeback_candidate.py ..."]
-}
-```
-
-The HTML page may display this state, but it must remain review-only until a later explicitly approved writeback step exists.
-
-## Main-Agent Review Decision
-
-After reviewing a workbench payload, the main agent records one explicit decision:
-
-- `accept`: use the suggested text as the final candidate.
-- `revise`: use a main-agent revised final text.
-- `reject`: reject the suggestion and keep it out of writeback preparation.
-
-Each decision record contains:
-
-```json
-{
-  "schema_version": 1,
-  "mode": "main_agent_review_decision",
-  "paragraph_id": "introduction-section-polish",
-  "source_file": "src/1_introduction.tex",
-  "section": "Polish Introduction",
-  "decision": "accept",
-  "review_notes": "Main agent accepts specialist suggestion.",
-  "original_text": "Original source text.",
-  "suggested_text": "Suggested revision.",
-  "final_text": "Final candidate text.",
-  "ready_for_writeback": true,
-  "metadata": {}
-}
-```
-
-Only `accept` and `revise` decisions can become writeback candidates. A `reject` decision must keep `ready_for_writeback` false.
-
-## Writeback Candidate
-
-A writeback candidate is generated only from a main-agent review decision with `ready_for_writeback: true`. It packages the original source text and final candidate text for later validation and possible source writeback.
-
-Each candidate contains:
-
-```json
-{
-  "schema_version": 1,
-  "mode": "writeback_candidate",
-  "paragraph_id": "introduction-section-polish",
-  "source_file": "src/1_introduction.tex",
-  "section": "Polish Introduction",
-  "decision": "accept",
-  "original_text": "Original source text.",
-  "final_text": "Final candidate text.",
-  "line_range": [1, 30],
-  "validation_required": true,
-  "source_write_permitted": false,
-  "metadata": {}
-}
-```
-
-Writeback candidates do not modify source files. They are an explicit staging artifact for a later validation and writeback step.
+The confirmation record lives in the conversation and, when useful, in the local polishing log. The paper project's git commit is the durable source-edit record.
 
 ## Task Board
 

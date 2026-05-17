@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).parent
-PACKAGE = ROOT / "fixtures" / "section-workbench" / "section-polish-package-introduction.json"
+PACKAGE = ROOT / "fixtures" / "section-polish" / "section-polish-package-introduction.json"
 VALIDATOR = ROOT.parent / "scripts" / "validate_section_polish_suggestions.py"
 MERGER = ROOT.parent / "scripts" / "merge_section_polish_suggestions.py"
 

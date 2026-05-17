@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).parent
-FIXTURE = ROOT / "fixtures" / "section-workbench" / "section-polish-package-introduction.json"
+FIXTURE = ROOT / "fixtures" / "section-polish" / "section-polish-package-introduction.json"
 SCRIPT = ROOT.parent / "scripts" / "validate_section_polish_package.py"
 
 
